@@ -1,7 +1,7 @@
 # ThreatRAG: Official AI506 Live Demonstration Script
 **Course:** AI506 — Multi-Agent Retrieval-Augmented Generation Systems  
 **Session Duration:** 20–30 Minutes (Presentation: 8–10 min | Live Demo: 7–10 min | Viva: 5–10 min)  
-**Presenter / Student:** Ahsan Habib Sitab  
+**Presenter / Student:** Asfar Hossain Sitab  
 **Live URL:** `http://localhost:8501`  
 
 ---

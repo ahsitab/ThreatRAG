@@ -109,7 +109,7 @@ def create_presentation():
     meta_box = slide1.shapes.add_textbox(Inches(1.0), Inches(4.8), Inches(11.3), Inches(1.8))
     tf_m = meta_box.text_frame
     p_m1 = tf_m.paragraphs[0]
-    p_m1.text = "Candidate / Researcher: Ahsan Habib Sitab (MSc in Artificial Intelligence and Machine Learning)"
+    p_m1.text = "Candidate / Researcher: Asfar Hossain Sitab (MSc in Artificial Intelligence and Machine Learning)"
     p_m1.font.size = Pt(13)
     p_m1.font.bold = True
     p_m1.font.color.rgb = COLOR_DARK

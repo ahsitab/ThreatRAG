@@ -1,7 +1,7 @@
 # AI506 MSc Midterm Project Compliance Audit: ThreatRAG
 **Course:** AI506 — Multi-Agent Retrieval-Augmented Generation Systems  
 **Project:** ThreatRAG: An Adaptive Hybrid Retrieval-Augmented Generation Framework for Explainable Cybersecurity Threat Intelligence and Incident Response  
-**Author / Researcher:** Ahsan Habib Sitab  
+**Author / Researcher:** Asfar Hossain Sitab  
 **Audit Date:** 2026-11-23  
 
 ---

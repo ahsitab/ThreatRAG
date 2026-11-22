@@ -1,7 +1,7 @@
 # AI506 MSc Midterm Project Specification: Final Compliance Report
 **Course:** AI506 — Multi-Agent Retrieval-Augmented Generation Systems  
 **Project Name:** ThreatRAG: An Adaptive Hybrid Retrieval-Augmented Generation Framework for Explainable Cybersecurity Threat Intelligence and Incident Response  
-**Candidate / Student:** Ahsan Habib Sitab  
+**Candidate / Student:** Asfar Hossain Sitab  
 **Assessment Total:** 20 Marks (Presentation & Viva: 20–30 Minutes)  
 **Verification Date:** 2026-11-23  
 **Overall Compliance Grade:** 100% COMPLIANT (PASS ON ALL 20 CRITERIA)  

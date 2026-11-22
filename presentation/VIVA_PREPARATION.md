@@ -1,7 +1,7 @@
 # ThreatRAG: Technical Viva & Inspection Preparation Guide
 **Course:** AI506 — Multi-Agent Retrieval-Augmented Generation Systems  
 **Context:** MSc Midterm Viva & Project Inspection (20 Marks)  
-**Student / Researcher:** Ahsan Habib Sitab  
+**Student / Researcher:** Asfar Hossain Sitab  
 
 ---
 

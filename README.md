@@ -301,7 +301,7 @@ docker compose down
 
 ```bibtex
 @mastersthesis{threatrag2026,
-  author       = {Ahsan Habib Sitab},
+  author       = {Asfar Hossain Sitab},
   title        = {{ThreatRAG: An Adaptive Hybrid Retrieval-Augmented Generation Framework for Explainable Cybersecurity Threat Intelligence and Incident Response}},
   school       = {School of Computing and Artificial Intelligence},
   year         = {2026},
@@ -313,4 +313,4 @@ docker compose down
 
 ---
 
-*Authored by Ahsan Habib Sitab • AIML-507 Research Project • ThreatRAG Framework*
+*Authored by Asfar Hossain Sitab • AIML-507 Research Project • ThreatRAG Framework*

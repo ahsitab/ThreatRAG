@@ -167,9 +167,9 @@ def build_ieee_html():
 <div class="header-block">
   <h1 class="paper-title">ThreatRAG: An Adaptive Hybrid Retrieval-Augmented Generation Framework for Explainable Cybersecurity Threat Intelligence and Incident Response</h1>
   <div class="author-block">
-    <span class="author-name">Ahsan Habib Sitab</span><br>
+    <span class="author-name">Asfar Hossain Sitab</span><br>
     School of Computing and Artificial Intelligence &bull; MSc in Artificial Intelligence and Machine Learning<br>
-    AI506 Course Project: Multi-Agent RAG Systems &bull; Email: sitab.ai.research@gmail.com &bull; Repository: https://github.com/ahsitab/ThreatRAG
+    AIML-507 / AI506 Course Project: Multi-Agent RAG Systems &bull; Email: sitab.ai.research@gmail.com &bull; Repository: https://github.com/ahsitab/ThreatRAG
   </div>
 </div>
 
@@ -361,7 +361,7 @@ def build_ieee_html():
 
 <h2 class="sec-heading">VII. Conclusion and Deliverables</h2>
 <p>ThreatRAG demonstrates that decoupling retrieval, reasoning, and verification into a collaborative multi-agent architecture resolves the critical hallucination and overconfidence challenges of standard RAG. With 100% citation precision, +207% correctness improvement, and ECE reduced to 0.0005, ThreatRAG offers a robust blueprint for explainable cybersecurity AI.</p>
-<p><strong>Individual Contributions:</strong> Ahsan Habib Sitab executed research planning, dataset acquisition, multi-agent development, evaluation, and documentation.</p>
+<p><strong>Individual Contributions:</strong> Asfar Hossain Sitab executed research planning, dataset acquisition, multi-agent development, evaluation, and documentation.</p>
 <p><strong>GitHub Repository:</strong> https://github.com/ahsitab/ThreatRAG</p>
 
 <h2 class="sec-heading">References</h2>
@@ -392,7 +392,7 @@ def build_presentation_html():
           <h1 class="cover-title">ThreatRAG: An Adaptive Hybrid Multi-Agent RAG Framework</h1>
           <h2 class="cover-subtitle">For Explainable Cybersecurity Threat Intelligence and Incident Response</h2>
           <div class="cover-meta">
-            <strong>Candidate / Researcher:</strong> Ahsan Habib Sitab (MSc in AI &amp; Machine Learning)<br>
+            <strong>Candidate / Researcher:</strong> Asfar Hossain Sitab (MSc in AI &amp; Machine Learning)<br>
             <strong>GitHub Repository:</strong> https://github.com/ahsitab/ThreatRAG &bull; <strong>Assessment:</strong> Midterm Project (20 Marks)
           </div>
         </div>
@@ -996,7 +996,7 @@ def build_final_compliance_report():
     report_content = """# AI506 MSc Midterm Project Specification: Final Compliance Report
 **Course:** AI506 — Multi-Agent Retrieval-Augmented Generation Systems  
 **Project Name:** ThreatRAG: An Adaptive Hybrid Retrieval-Augmented Generation Framework for Explainable Cybersecurity Threat Intelligence and Incident Response  
-**Candidate / Student:** Ahsan Habib Sitab  
+**Candidate / Student:** Asfar Hossain Sitab  
 **Assessment Total:** 20 Marks (Presentation & Viva: 20–30 Minutes)  
 **Verification Date:** 2026-11-23  
 **Overall Compliance Grade:** 100% COMPLIANT (PASS ON ALL 20 CRITERIA)  

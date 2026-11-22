@@ -1,7 +1,7 @@
 # Selected Base Research Paper: MAIN-RAG (ACL 2025)
 **Course:** AI506 — Multi-Agent Retrieval-Augmented Generation Systems  
 **Project:** ThreatRAG: An Adaptive Hybrid Retrieval-Augmented Generation Framework  
-**Student:** Ahsan Habib Sitab  
+**Student:** Asfar Hossain Sitab  
 
 ---
 

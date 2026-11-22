@@ -43,7 +43,7 @@ def generate_notebook():
     nb.cells.append(new_markdown_cell("""# ThreatRAG: Research Evaluation, Exploratory Data Analysis & Multi-Agent RAG
 **Project:** ThreatRAG — Adaptive Hybrid Retrieval-Augmented Generation for Explainable Cybersecurity Threat Intelligence  
 **Course:** AI506 / AIML-507 (MSc in Artificial Intelligence and Machine Learning)  
-**Author:** Ahsan Habib Sitab  
+**Author:** Asfar Hossain Sitab  
 **Repository:** [https://github.com/ahsitab/ThreatRAG](https://github.com/ahsitab/ThreatRAG)  
 
 ---

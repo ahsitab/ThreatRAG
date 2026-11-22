@@ -2,7 +2,7 @@
 **Course:** AI506 — Multi-Agent Retrieval-Augmented Generation Systems  
 **Project:** ThreatRAG: An Adaptive Hybrid RAG Framework for Explainable Threat Intelligence  
 **Base Paper:** *MAIN-RAG: Multi-Agent Filtering Retrieval-Augmented Generation* (ACL 2025) [1]  
-**Author:** Ahsan Habib Sitab  
+**Author:** Asfar Hossain Sitab  
 
 ---
 
