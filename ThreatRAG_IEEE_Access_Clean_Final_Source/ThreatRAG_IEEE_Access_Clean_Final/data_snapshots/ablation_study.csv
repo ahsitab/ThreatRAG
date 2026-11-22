@@ -1,0 +1,9 @@
+ablation_variant,recall@5,ndcg@5,faithfulness,expected_calibration_error,delta_recall@5,delta_ndcg@5
+Full Proposed ThreatRAG,1.0,0.6774,0.98,0.0005,0.0,0.0
+w/o BM25 Lexical Retrieval,1.0,0.5933,0.98,0.0005,0.0,-0.0841
+w/o Dense Semantic Retrieval,1.0,0.7143,0.98,0.0005,0.0,0.0369
+w/o Structured Event Matching,1.0,0.7243,0.98,0.0005,0.0,0.0469
+w/o Cross-Encoder Reranker,1.0,0.6484,0.98,0.0005,0.0,-0.029
+w/o Adaptive Query Routing,1.0,0.6774,0.98,0.0005,0.0,-0.0
+w/o Citation Verification,1.0,0.6774,0.81,0.0005,0.0,-0.0
+w/o Confidence Calibration,1.0,0.6774,0.98,0.0037,0.0,-0.0

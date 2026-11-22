@@ -1,0 +1,6 @@
+task_id,task_type,latency_seconds,tokens,estimated_cost_usd,status
+TASK-1,valid_incident,8.633,3310,0.000789,Completed
+TASK-2,valid_incident,6.336,2864,0.000722,Completed
+TASK-3,valid_incident,5.173,3148,0.000765,Completed
+TASK-4,adversarial_injection,6.239,3128,0.000762,Completed
+TASK-5,insufficient_evidence,6.3,3148,0.000765,Completed

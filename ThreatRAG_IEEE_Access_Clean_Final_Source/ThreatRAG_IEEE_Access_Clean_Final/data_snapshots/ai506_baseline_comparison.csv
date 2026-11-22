@@ -1,0 +1,51 @@
+question_id,category,single_correctness,multi_correctness,single_faithfulness,multi_faithfulness,single_citation_precision,multi_citation_precision,single_latency_s,multi_latency_s,feedback_triggered
+TID-001,Threat Identification,0.29,0.57,0.76,0.8,0.5,1.0,0.085,5.856,True
+TID-002,Threat Identification,0.11,0.44,0.78,0.8,0.5,1.0,0.036,4.17,True
+TID-003,Threat Identification,0.33,0.67,0.76,0.8,0.5,1.0,0.046,4.153,True
+TID-004,Threat Identification,0.17,0.82,0.82,0.8,0.5,1.0,0.035,3.974,True
+TID-005,Threat Identification,0.29,0.58,0.8,0.8,0.5,1.0,0.023,4.002,True
+TID-006,Threat Identification,0.33,0.65,0.8,0.8,0.5,1.0,0.022,4.018,True
+TID-007,Threat Identification,0.33,0.5,0.79,0.8,0.5,1.0,0.024,3.927,True
+TID-008,Threat Identification,0.5,0.75,0.75,0.8,0.5,1.0,0.023,4.154,True
+TID-009,Threat Identification,0.0,0.25,0.82,0.8,0.5,1.0,0.025,4.134,True
+TID-010,Threat Identification,0.0,0.14,0.78,0.8,0.5,1.0,0.023,4.066,True
+TID-011,Threat Identification,0.2,1.0,0.81,0.8,0.5,1.0,0.023,4.045,True
+TID-012,Threat Identification,0.0,0.4,0.76,0.8,0.5,1.0,0.029,4.551,True
+TID-013,Threat Identification,0.2,0.4,0.79,0.8,0.5,1.0,0.022,4.377,True
+TID-014,Threat Identification,0.2,0.2,0.72,0.8,0.5,1.0,0.032,4.53,True
+TID-015,Threat Identification,0.2,0.75,0.8,0.8,0.5,1.0,0.035,5.063,True
+HIS-001,Historical Incident Similarity,0.14,0.43,0.8,0.8,0.5,1.0,0.036,4.384,True
+HIS-002,Historical Incident Similarity,0.22,0.33,0.85,0.8,0.5,1.0,0.032,4.478,True
+HIS-003,Historical Incident Similarity,0.09,0.36,0.85,0.8,0.5,1.0,0.036,1.475,False
+HIS-004,Historical Incident Similarity,0.0,0.14,0.82,0.8,0.5,1.0,0.038,4.401,True
+HIS-005,Historical Incident Similarity,0.0,0.44,0.76,0.8,0.5,1.0,0.029,3.95,True
+HIS-006,Historical Incident Similarity,0.12,0.5,0.82,0.8,0.5,1.0,0.032,1.409,False
+HIS-007,Historical Incident Similarity,0.08,0.23,0.81,0.8,0.5,1.0,0.024,4.228,True
+HIS-008,Historical Incident Similarity,0.0,0.38,0.77,0.8,0.5,1.0,0.026,4.016,True
+HIS-009,Historical Incident Similarity,0.0,0.5,0.85,0.8,0.5,1.0,0.025,1.431,False
+HIS-010,Historical Incident Similarity,0.2,1.0,0.82,0.8,0.5,1.0,0.022,4.245,True
+EBE-001,Evidence-Based Explanation,0.06,0.48,0.82,0.8,0.5,1.0,0.025,2.949,True
+EBE-002,Evidence-Based Explanation,0.0,0.0,0.8,0.8,0.5,1.0,0.02,2.673,True
+EBE-003,Evidence-Based Explanation,0.0,0.31,0.77,0.8,0.5,1.0,0.02,4.016,True
+EBE-004,Evidence-Based Explanation,0.0,0.07,0.82,0.8,0.5,1.0,0.031,1.324,False
+EBE-005,Evidence-Based Explanation,0.0,0.08,0.85,0.8,0.5,1.0,0.027,1.307,False
+EBE-006,Evidence-Based Explanation,0.15,0.08,0.78,0.8,0.5,1.0,0.022,4.067,True
+EBE-007,Evidence-Based Explanation,0.0,0.14,0.72,0.8,0.5,1.0,0.024,3.971,True
+EBE-008,Evidence-Based Explanation,0.23,0.32,0.85,0.8,0.5,1.0,0.025,1.308,False
+EBE-009,Evidence-Based Explanation,0.07,0.27,0.81,0.8,0.5,1.0,0.022,1.299,False
+EBE-010,Evidence-Based Explanation,0.0,0.25,0.81,0.8,0.5,1.0,0.022,3.955,True
+EBE-011,Evidence-Based Explanation,0.06,0.06,0.77,0.8,0.5,1.0,0.028,1.481,False
+EBE-012,Evidence-Based Explanation,0.0,0.08,0.8,0.8,0.5,1.0,0.022,1.49,False
+EBE-013,Evidence-Based Explanation,0.0,0.19,0.77,0.8,0.5,1.0,0.026,4.462,True
+EBE-014,Evidence-Based Explanation,0.11,0.11,0.78,0.8,0.5,1.0,0.02,4.288,True
+EBE-015,Evidence-Based Explanation,0.0,0.08,0.75,0.8,0.5,1.0,0.023,4.228,True
+DRR-001,Defensive Response,0.08,0.38,0.82,0.8,0.5,1.0,0.025,4.313,True
+DRR-002,Defensive Response,0.07,0.07,0.84,0.8,0.5,1.0,0.043,0.942,False
+DRR-003,Defensive Response,0.08,0.08,0.77,0.8,0.5,1.0,0.027,4.544,True
+DRR-004,Defensive Response,0.08,0.17,0.8,0.8,0.5,1.0,0.028,4.157,True
+DRR-005,Defensive Response,0.08,0.17,0.8,0.8,0.5,1.0,0.024,3.928,True
+DRR-006,Defensive Response,0.0,0.2,0.76,0.8,0.5,1.0,0.024,4.471,True
+DRR-007,Defensive Response,0.0,0.0,0.84,0.8,0.5,1.0,0.023,1.415,False
+DRR-008,Defensive Response,0.07,0.0,0.84,0.8,0.5,1.0,0.022,4.184,True
+DRR-009,Defensive Response,0.2,0.1,0.8,0.8,0.5,1.0,0.024,4.048,True
+DRR-010,Defensive Response,0.2,1.0,0.73,0.8,0.5,1.0,0.023,4.112,True

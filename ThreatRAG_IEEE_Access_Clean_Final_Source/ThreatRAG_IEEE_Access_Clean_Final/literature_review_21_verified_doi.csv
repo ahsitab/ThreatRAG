@@ -1,0 +1,22 @@
+bibtex_key,authors,year,topic,contribution,limitation,doi,doi_link
+mainrag,Chang et al.,2025,Multi-agent filtering,Predictor--Judge--Final Predictor; thresholded evidence selection,General QA; not cybersecurity,10.18653/v1/2025.acl-long.131,https://doi.org/10.18653/v1/2025.acl-long.131
+massrag,Xiao et al.,2026,Multi-agent synthesis,"Separate summarization, extraction and reasoning specialists",General QA benchmarks,10.18653/v1/2026.findings-acl.480,https://doi.org/10.18653/v1/2026.findings-acl.480
+techniquerag,Lekssays et al.,2025,Cyber threat intelligence,Retrieval-supported ATT&CK technique annotation,"Technique labels, not end-to-end response",10.18653/v1/2025.findings-acl.1076,https://doi.org/10.18653/v1/2025.findings-acl.1076
+dpr,Karpukhin et al.,2020,Dense retrieval,Learned passage embeddings,Exact identifiers can be missed,10.18653/v1/2020.emnlp-main.550,https://doi.org/10.18653/v1/2020.emnlp-main.550
+sbert,Reimers and Gurevych,2019,Embedding,Efficient sentence similarity representations,Not domain-calibrated,10.18653/v1/D19-1410,https://doi.org/10.18653/v1/D19-1410
+rrf,Cormack et al.,2009,Rank fusion,Combines heterogeneous rankings without score calibration,No answer verification,10.1145/1571941.1572114,https://doi.org/10.1145/1571941.1572114
+hyde,Gao et al.,2023,Zero-shot retrieval,Hypothetical answer-based query representation,Potentially noisy pseudo-documents,10.18653/v1/2023.acl-long.99,https://doi.org/10.18653/v1/2023.acl-long.99
+activerag,Jiang et al.,2023,Iterative retrieval,Retrieval conditioned on evolving generation,More interactions and overhead,10.18653/v1/2023.emnlp-main.495,https://doi.org/10.18653/v1/2023.emnlp-main.495
+adaptiverag,Jeong et al.,2024,Adaptive routing,Complexity-aware retrieval depth,Domain transfer untested here,10.18653/v1/2024.naacl-long.389,https://doi.org/10.18653/v1/2024.naacl-long.389
+ragas,Es et al.,2024,Evaluation,Automated grounding and answer quality scoring,Automatic judgments require audit,10.18653/v1/2024.eacl-demo.16,https://doi.org/10.18653/v1/2024.eacl-demo.16
+ares,Saad-Falcon et al.,2024,Evaluation,LLM-judge evaluation with calibrated sampling,Judge reliability depends on labels,10.18653/v1/2024.naacl-long.20,https://doi.org/10.18653/v1/2024.naacl-long.20
+alce,Gao et al.,2023,Citation quality,Citation-supported long-form generation assessment,Citation presence != entailment,10.18653/v1/2023.emnlp-main.398,https://doi.org/10.18653/v1/2023.emnlp-main.398
+lostmiddle,Liu et al.,2024,Context robustness,Studies attention to evidence position,Not a cybersecurity solution,10.1162/tacl_a_00638,https://doi.org/10.1162/tacl_a_00638
+m3embed,Chen et al.,2024,Hybrid embedding,Dense and sparse multi-functional representations,Not used as deployed embedding,10.18653/v1/2024.findings-acl.137,https://doi.org/10.18653/v1/2024.findings-acl.137
+mrag,Wang et al.,2024,Memory partitioning,Multi-partition RAG with multi-agent training,Training-intensive design,10.18653/v1/2024.acl-long.108,https://doi.org/10.18653/v1/2024.acl-long.108
+cicpaper,Sharafaldin et al.,2018,Intrusion data,CIC-IDS2017 dataset development,Synthetic capture artifacts,10.5220/0006639801080116,https://doi.org/10.5220/0006639801080116
+unswpaper,Moustafa and Slay,2015,Intrusion data,UNSW-NB15 as external IDS dataset,Not evaluated in ThreatRAG,10.1109/MILCIS.2015.7348942,https://doi.org/10.1109/MILCIS.2015.7348942
+ragbench,Chen et al.,2024,RAG robustness,Benchmark of noisy RAG behavior,Does not validate this corpus,10.1609/AAAI.V38I16.29728,https://doi.org/10.1609/AAAI.V38I16.29728
+msrag,You et al.,2025,Multi-semantic RAG,Mixed recall and semantic reranking,"General QA, not incident triage",10.18653/v1/2025.emnlp-main.1151,https://doi.org/10.18653/v1/2025.emnlp-main.1151
+evtree,Sun et al.,2025,Evidence search,Evidence-tree exploration for RAG,Higher search complexity,10.18653/v1/2025.acl-long.1175,https://doi.org/10.18653/v1/2025.acl-long.1175
+datasurvey,Deng et al.,2026,Agentic RAG survey,Data-centric failure modes and evaluation taxonomy,"Survey, not experimental baseline",10.18653/v1/2026.findings-acl.78,https://doi.org/10.18653/v1/2026.findings-acl.78
