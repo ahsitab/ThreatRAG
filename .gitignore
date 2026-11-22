@@ -1,0 +1,29 @@
+# Python Bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Environments
+venv/
+env/
+.venv/
+ENV/
+
+# Pytest & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Large Raw Datasets (Recreated deterministically via scripts/download_datasets.py)
+data/raw/cic_ids2017/Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv
+data/raw/mitre_attack/enterprise-attack.json
+
+# Local Environment Variables & Secrets
+.env

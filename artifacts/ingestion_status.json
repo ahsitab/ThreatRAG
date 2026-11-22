@@ -1,0 +1,11 @@
+{
+  "last_updated": "2026-11-22T18:42:11.651090Z",
+  "total_documents": 0,
+  "total_chunks": 1074,
+  "sources": {
+    "mitre_attack": 718,
+    "cisa_kev": 350,
+    "historical_incidents": 6
+  },
+  "status": "operational"
+}

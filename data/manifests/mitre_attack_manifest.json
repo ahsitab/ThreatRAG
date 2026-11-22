@@ -1,0 +1,19 @@
+{
+  "dataset_key": "mitre_attack",
+  "source_url": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json",
+  "download_timestamp": "2026-11-22T18:35:04.351516Z",
+  "dataset_version": "15.1",
+  "license_and_terms": "Apache 2.0 / MITRE Terms of Use",
+  "description": "MITRE ATT&CK Enterprise STIX 2.1 dataset containing tactics, techniques, mitigations, and relationships.",
+  "file_name": "enterprise-attack.json",
+  "file_size_bytes": 55277605,
+  "file_size_mb": 52.72,
+  "sha256_checksum": "539a843a7b53ed9749740b2123dddae3726b1a4831841c32aca740b011b910b5",
+  "record_count": 26699,
+  "processing_pipeline": "Phase 2 ingestion -> Phase 3 vector store & feature extraction",
+  "known_limitations": [
+    "Synthetic or lab-generated background traffic in parts of CIC-IDS2017",
+    "CISA KEV catalog lists confirmed exploited vulnerabilities, not all disclosed CVEs",
+    "Historical incidents are based on published public advisory reports from CISA and security vendors"
+  ]
+}

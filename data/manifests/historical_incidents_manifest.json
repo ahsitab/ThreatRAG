@@ -1,0 +1,19 @@
+{
+  "dataset_key": "historical_incidents",
+  "source_url": "https://www.cisa.gov/news-events/cybersecurity-advisories",
+  "download_timestamp": "2026-11-22T18:36:25.315968Z",
+  "dataset_version": "1.0",
+  "license_and_terms": "Public Domain / CC0",
+  "description": "Curated corpus of landmark real-world cyber incidents with ATT&CK mappings and IoCs.",
+  "file_name": "historical_incidents.json",
+  "file_size_bytes": 10923,
+  "file_size_mb": 0.01,
+  "sha256_checksum": "e02c8bab85a05dedd06a1932b2523be5177f916c7d8c0c23639bfca6be609018",
+  "record_count": 6,
+  "processing_pipeline": "Phase 2 ingestion -> Phase 3 vector store & feature extraction",
+  "known_limitations": [
+    "Synthetic or lab-generated background traffic in parts of CIC-IDS2017",
+    "CISA KEV catalog lists confirmed exploited vulnerabilities, not all disclosed CVEs",
+    "Historical incidents are based on published public advisory reports from CISA and security vendors"
+  ]
+}

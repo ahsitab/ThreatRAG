@@ -1,0 +1,10 @@
+model,calibration,accuracy,precision,recall,macro_f1,false_positive_rate,ece,brier_score
+LogisticRegression,None (Raw),0.9925,0.9859,0.9993,0.9926,0.0143,0.0091,0.0049
+LogisticRegression,Platt Scaling,0.9928,0.9865,0.9993,0.9929,0.0143,0.0093,0.0048
+LogisticRegression,Isotonic Regression,0.9982,0.997,0.9993,0.9982,0.0143,0.001,0.0019
+RandomForest,None (Raw),0.9992,1.0,0.9983,0.9992,0.0,0.0011,0.0006
+RandomForest,Platt Scaling,0.9992,0.9997,0.9987,0.9992,0.0,0.001,0.0006
+RandomForest,Isotonic Regression,0.9993,0.9997,0.999,0.9993,0.0,0.0007,0.0005
+LightGBM,None (Raw),0.9997,1.0,0.9993,0.9997,0.0,0.0037,0.0003
+LightGBM,Platt Scaling,0.9998,1.0,0.9997,0.9998,0.0,0.0005,0.0002
+LightGBM,Isotonic Regression,0.9998,1.0,0.9997,0.9998,0.0,0.0003,0.0002

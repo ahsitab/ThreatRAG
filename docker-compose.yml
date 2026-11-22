@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  threatrag-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: threatrag-api
+    ports:
+      - "8000:8000"
+    environment:
+      - FASTAPI_PORT=8000
+      - CHROMA_PERSIST_DIR=/app/artifacts/chroma_db
+      - BM25_INDEX_PATH=/app/artifacts/bm25_index.pkl
+      - MODEL_PATH=/app/artifacts/threat_classifier.joblib
+      - SCALER_PATH=/app/artifacts/flow_scaler.joblib
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+      - ./reports:/app/reports
+    command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  threatrag-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: threatrag-ui
+    ports:
+      - "8501:8501"
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+      - ./reports:/app/reports
+    command: ["streamlit", "run", "app/dashboard.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    depends_on:
+      - threatrag-api
+    restart: unless-stopped

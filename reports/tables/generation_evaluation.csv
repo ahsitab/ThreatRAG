@@ -1,0 +1,6 @@
+configuration,faithfulness_score,citation_precision,unsupported_claim_rate,grounding_pass_rate
+E1: Direct Generation (No Retrieval),0.0,1.0,1.0,0.0
+E2: Vanilla Dense RAG,0.7333,1.0,0.2667,0.0
+E3: Hybrid Dense + BM25,0.7333,1.0,0.2667,0.0
+E4: Hybrid + Cross-Encoder,0.7333,1.0,0.2667,0.0
+E5: Proposed Adaptive System,0.7333,1.0,0.2667,0.0

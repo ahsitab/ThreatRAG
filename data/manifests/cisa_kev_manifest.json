@@ -1,0 +1,19 @@
+{
+  "dataset_key": "cisa_kev",
+  "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+  "download_timestamp": "2026-11-22T18:35:05.473320Z",
+  "dataset_version": "2026.11",
+  "license_and_terms": "U.S. Government Public Domain",
+  "description": "CISA Known Exploited Vulnerabilities (KEV) Catalog with remediation guidance.",
+  "file_name": "known_exploited_vulnerabilities.json",
+  "file_size_bytes": 1871127,
+  "file_size_mb": 1.78,
+  "sha256_checksum": "12c9ca4c5350ecacdf22bdce91b4ffcf06b8c8dc9c69b8bfb4c1a21be7a5fe50",
+  "record_count": 1790,
+  "processing_pipeline": "Phase 2 ingestion -> Phase 3 vector store & feature extraction",
+  "known_limitations": [
+    "Synthetic or lab-generated background traffic in parts of CIC-IDS2017",
+    "CISA KEV catalog lists confirmed exploited vulnerabilities, not all disclosed CVEs",
+    "Historical incidents are based on published public advisory reports from CISA and security vendors"
+  ]
+}
