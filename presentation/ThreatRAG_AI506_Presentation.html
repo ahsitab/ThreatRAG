@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ThreatRAG Presentation - AI506 Midterm</title>
+<style>
+  @page {
+    size: letter landscape;
+    margin: 0.45in 0.5in 0.45in 0.5in;
+  }
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #0f172a;
+  }
+  .slide {
+    page-break-after: always;
+    display: block;
+    margin-bottom: 20pt;
+  }
+  .slide-cover {
+    background: #1e3a8a;
+    color: #ffffff;
+    padding: 24pt;
+    border-radius: 6pt;
+  }
+  .badge-tag {
+    font-size: 9pt;
+    font-weight: bold;
+    color: #f43f5e;
+    letter-spacing: 1px;
+    margin-bottom: 8pt;
+    text-transform: uppercase;
+  }
+  .cover-title {
+    font-size: 19pt;
+    font-weight: bold;
+    margin: 0 0 8pt 0;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+  .cover-subtitle {
+    font-size: 13pt;
+    margin: 0 0 16pt 0;
+    color: #cbd5e1;
+  }
+  .cover-meta {
+    font-size: 9pt;
+    color: #94a3b8;
+    line-height: 1.4;
+    border-top: 1pt solid rgba(255,255,255,0.2);
+    padding-top: 10pt;
+  }
+  .slide-header {
+    margin-bottom: 8pt;
+    border-bottom: 1.5pt solid #1e3a8a;
+    padding-bottom: 4pt;
+  }
+  .slide-cat {
+    font-size: 7.5pt;
+    font-weight: bold;
+    color: #e11d48;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .slide-title {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin: 2pt 0 0 0;
+  }
+  table.grid-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  td.card-td {
+    vertical-align: top;
+    padding: 0 6pt;
+  }
+  td.card-td:first-child {
+    padding-left: 0;
+  }
+  td.card-td:last-child {
+    padding-right: 0;
+  }
+  .card {
+    background: #f8fafc;
+    border: 1pt solid #cbd5e1;
+    border-radius: 5pt;
+    padding: 8pt 10pt;
+  }
+  .card-title {
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin: 0 0 6pt 0;
+    border-bottom: 0.8pt solid #e2e8f0;
+    padding-bottom: 3pt;
+  }
+  ul {
+    margin: 0 0 0 12pt;
+    padding: 0;
+    font-size: 8pt;
+    line-height: 1.35;
+    color: #334155;
+  }
+  li {
+    margin-bottom: 3pt;
+  }
+  table.slide-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border: 1pt solid #cbd5e1;
+    font-size: 8pt;
+    margin-top: 4pt;
+  }
+  table.slide-table th {
+    background: #1e3a8a;
+    color: #ffffff;
+    padding: 5pt 6pt;
+    text-align: left;
+    font-weight: bold;
+  }
+  table.slide-table td {
+    padding: 4pt 6pt;
+    border-bottom: 0.5pt solid #e2e8f0;
+  }
+  .badge-success {
+    background: #dcfce7;
+    color: #166534;
+    font-weight: bold;
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+    font-size: 7.5pt;
+  }
+</style>
+</head>
+<body>
+
+        <div class="slide slide-cover">
+          <div class="badge-tag">AI506: MULTI-AGENT RETRIEVAL-AUGMENTED GENERATION SYSTEMS</div>
+          <h1 class="cover-title">ThreatRAG: An Adaptive Hybrid Multi-Agent RAG Framework</h1>
+          <h2 class="cover-subtitle">For Explainable Cybersecurity Threat Intelligence and Incident Response</h2>
+          <div class="cover-meta">
+            <strong>Candidate / Researcher:</strong> Ahsan Habib Sitab (MSc in AI &amp; Machine Learning)<br>
+            <strong>GitHub Repository:</strong> https://github.com/ahsitab/ThreatRAG &bull; <strong>Assessment:</strong> Midterm Project (20 Marks)
+          </div>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">Problem Statement, Target Users &amp; Objectives</h2>
+          </div>
+          <table class="grid-table">
+            <tr>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Operational Pain Points in Modern SOCs</h3>
+                  <ul>
+                    <li><strong>Alert Fatigue:</strong> SOC analysts face hundreds of noisy anomaly alerts daily without context.</li>
+                    <li><strong>Black-Box ML Detectors:</strong> Classifiers flag anomalies without root cause attribution or MITRE mapping.</li>
+                    <li><strong>LLM Hallucinations:</strong> Commercial LLMs invent nonexistent CVEs and disruptive remediation steps.</li>
+                    <li><strong>Uncalibrated Confidence:</strong> Deep models output dangerous 99% confidence on novel zero-day inputs.</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Target Users &amp; Project Objectives</h3>
+                  <ul>
+                    <li><strong>Target Users:</strong> Tier-1/Tier-2 SOC Analysts, Incident Responders, Threat Hunters.</li>
+                    <li><strong>Objective 1: Multi-Agent Collaboration:</strong> Coordinator, Retrieval, Reasoning, and Verification specialists.</li>
+                    <li><strong>Objective 2: Tri-Modal Hybrid Retrieval:</strong> Dense embeddings + BM25 + NetFlow matching via RRF (<i>k</i>=60).</li>
+                    <li><strong>Objective 3: Calibrated Probabilities:</strong> Platt scaling reducing ECE by 86.5% (0.0037 &rarr; 0.0005).</li>
+                    <li><strong>Objective 4: Strictly Defensive Posture:</strong> Mandatory Human-in-the-Loop authorization gate.</li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">Selected Base Research Paper: MAIN-RAG (ACL 2025)</h2>
+          </div>
+          <div class="card" style="margin-bottom: 8pt;">
+            <h3 class="card-title">Paper Metadata &amp; Official Citation</h3>
+            <ul>
+              <li><strong>Title:</strong> MAIN-RAG: Multi-Agent Filtering Retrieval-Augmented Generation</li>
+              <li><strong>Authors:</strong> Ching-Yuan Chang, Chia-Hsuan Lee, Ning-Hsuan Wang, and Yun-Nung Chen</li>
+              <li><strong>Venue:</strong> Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (ACL 2025), pp. 2607–2622.</li>
+              <li><strong>Status:</strong> Peer-Reviewed Full Research Paper at Flagship NLP Conference.</li>
+            </ul>
+          </div>
+          <table class="grid-table">
+            <tr>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Core Methodology &amp; Contribution</h3>
+                  <ul>
+                    <li>Replaces single monolithic RAG with multi-agent filtering.</li>
+                    <li>Decomposes pipeline into query planner, retriever, passage filter, and answer verifier.</li>
+                    <li>Demonstrates that isolating passage filtering and verification substantially reduces context noise.</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Key Limitations Identified in Base Paper</h3>
+                  <ul>
+                    <li>Evaluated only on open-domain QA (HotpotQA) - lacks cybersecurity domain adaptation.</li>
+                    <li>Relies on verbalized LLM self-confidence without statistical calibration.</li>
+                    <li>Text-only modality: cannot ingest structured network flow telemetry.</li>
+                    <li>Unbounded feedback loops introduce latency unacceptable for SOC triage.</li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">How MAIN-RAG Inspired ThreatRAG: Adoption, Adaptation &amp; Extension</h2>
+          </div>
+          <table class="grid-table">
+            <tr>
+              <td class="card-td" width="33%">
+                <div class="card">
+                  <h3 class="card-title" style="color: #1e3a8a;">1. What We Adopted</h3>
+                  <ul>
+                    <li><strong>Decoupled Roles:</strong> Separating the verification and filtering specialist from the generator.</li>
+                    <li><strong>Iterative Feedback Loop:</strong> Re-retrieving evidence when verification identifies missing support.</li>
+                    <li><strong>Stateful Orchestration:</strong> Shared typed workflow state (<code>ThreatRAGState</code>) across all agents.</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="card-td" width="33%">
+                <div class="card">
+                  <h3 class="card-title" style="color: #0284c7;">2. What We Adapted</h3>
+                  <ul>
+                    <li><strong>Domain Verification:</strong> Auditing against MITRE ATT&amp;CK Matrix v14.1 and CISA KEV catalog.</li>
+                    <li><strong>Epistemic Separation:</strong> Strictly separating empirical telemetry facts from adversary hypotheses.</li>
+                    <li><strong>Citation Precision:</strong> Rigorous extraction of bracketed chunk IDs and Faithfulness scoring.</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="card-td" width="33%">
+                <div class="card">
+                  <h3 class="card-title" style="color: #e11d48;">3. What We Extended</h3>
+                  <ul>
+                    <li><strong>Tri-Modal RAG:</strong> Dense + BM25 + Structured event matching via Reciprocal Rank Fusion (<i>k</i>=60).</li>
+                    <li><strong>Platt Calibration:</strong> Post-hoc scaling on LightGBM reducing ECE by 86.5% on 6,000 flows.</li>
+                    <li><strong>Human Gate:</strong> Mandatory human sign-off for defensive containment actions.</li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">ThreatRAG Multi-Agent Architecture &amp; Communication Flow</h2>
+          </div>
+          <table class="grid-table">
+            <tr>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">4 Specialized Collaborative Agents</h3>
+                  <ul>
+                    <li><strong>Coordinator / Planner:</strong> Decomposes query, formulates workflow plan, schedules specialists, manages state, and caps retries (<i>max_retries</i>=2).</li>
+                    <li><strong>Retrieval Specialist:</strong> Hybrid dense-sparse retrieval across 1,074 chunks + query expansion on feedback requests.</li>
+                    <li><strong>Reasoning Specialist:</strong> Calibrated LightGBM inference, ATT&amp;CK mapping, fact/hypothesis separation, playbook synthesis.</li>
+                    <li><strong>Verification Specialist:</strong> Audits citations, checks faithfulness, detects insufficient evidence, triggers feedback loop.</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Observable Trace &amp; Feedback Loop</h3>
+                  <div style="background: #f1f5f9; padding: 6pt; border-radius: 4pt; font-family: Courier, monospace; font-size: 7.5pt; line-height: 1.35;">
+                    [User Query / NetFlow] &rarr; <strong>Coordinator Agent</strong><br>
+                    &nbsp;&nbsp;&darr; <i>(Structured Execution Plan)</i><br>
+                    <strong>Retrieval Specialist</strong> &harr; [1,074 Chunks (ChromaDB + BM25)]<br>
+                    &nbsp;&nbsp;&darr; <i>(Top-k Hybrid Candidates)</i><br>
+                    <strong>Reasoning Specialist</strong> &harr; [Calibrated LightGBM Classifier]<br>
+                    &nbsp;&nbsp;&darr; <i>(Synthesized Analysis &amp; Citations)</i><br>
+                    <strong>Verification Specialist</strong> &mdash; <i>Insufficient?</i> &rarr; <strong>[Feedback Loop]</strong><br>
+                    &nbsp;&nbsp;&darr; <i>(Verified &amp; Faithfulness Audited)</i><br>
+                    <strong>Human-in-the-Loop Gate</strong> &rarr; [Final Response]
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">Knowledge Corpus, Retrieval Pipeline &amp; Models</h2>
+          </div>
+          <table class="grid-table">
+            <tr>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Knowledge Corpus &amp; Dataset Provenance</h3>
+                  <ul>
+                    <li><strong>MITRE ATT&amp;CK Enterprise STIX 2.1:</strong> 718 techniques, tactics, mitigations, and platform relationships.</li>
+                    <li><strong>CISA Known Exploited Vulnerabilities (KEV):</strong> 1,790 CVE records with remediation due dates.</li>
+                    <li><strong>Curated Historical Incidents:</strong> Dyn DNS DDoS, SolarWinds SUNBURST, MOVEit, Target, WannaCry.</li>
+                    <li><strong>CIC-IDS2017 Benchmark:</strong> 30,000 balanced flows (18k train, 6k calibration, 6k held-out test).</li>
+                    <li><strong>Indexed Corpus:</strong> 1,074 structured chunks with SHA-256 integrity manifests.</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Models, Frameworks &amp; Serving Stack</h3>
+                  <ul>
+                    <li><strong>Dense Embeddings:</strong> <code>all-MiniLM-L6-v2</code> (384 dimensions) in persistent ChromaDB.</li>
+                    <li><strong>Sparse Lexical Search:</strong> <code>rank-bm25</code> (BM25Okapi) with cybersecurity entity tokenization.</li>
+                    <li><strong>Cross-Encoder Reranker:</strong> <code>ms-marco-MiniLM-L-6-v2</code> for candidate rescoring.</li>
+                    <li><strong>ML Classifier &amp; Calibration:</strong> LightGBM + Platt Scaling (ECE reduced to 0.0005).</li>
+                    <li><strong>Serving Stack:</strong> FastAPI backend (port 8000) + Streamlit dashboard (port 8501).</li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">Experimental Setup: Test Benchmark &amp; Baseline Conditions</h2>
+          </div>
+          <table class="grid-table">
+            <tr>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Curated 50-Question Benchmark Suite</h3>
+                  <ul>
+                    <li><strong>Task 1: Threat Identification (15 Qs):</strong> NetFlow telemetry validation, port anomaly mapping, DDoS classification.</li>
+                    <li><strong>Task 2: Historical Incident Similarity (10 Qs):</strong> Precedent matching, shared traits &amp; protocol differences.</li>
+                    <li><strong>Task 3: Evidence-Based Explanation (15 Qs):</strong> ATT&amp;CK grounding, epistemic fact/hypothesis separation.</li>
+                    <li><strong>Task 4: Defensive Response (10 Qs):</strong> Prioritized containment playbooks, CISA remediation actions.</li>
+                    <li><strong>Edge Cases:</strong> 4 deliberate ungrounded queries testing principled abstention.</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Strictly Identical Baseline Conditions</h3>
+                  <ul>
+                    <li><strong>Conventional Single-Agent RAG:</strong> Identical 1,074 chunks, identical <code>all-MiniLM-L6-v2</code> embeddings, identical top-<i>k</i>=5 retrieval pool.</li>
+                    <li><strong>Fair Isolation:</strong> Isolates the impact of multi-agent planning, Platt calibration, hybrid fusion, and verification feedback.</li>
+                    <li><strong>Evaluated Quality Metrics:</strong> Answer Correctness (Token F1 / Rubric), Faithfulness (RAGAs), Citation Precision.</li>
+                    <li><strong>Evaluated Efficiency Metrics:</strong> Response Latency (s), Token Usage, and Monetary Cost ($USD).</li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">Measured Experimental Results: ThreatRAG vs. Baseline (N=50)</h2>
+          </div>
+          <table class="slide-table">
+            <thead>
+              <tr>
+                <th>Evaluated Metric</th>
+                <th>Conventional Single-Agent RAG</th>
+                <th>Multi-Agent ThreatRAG</th>
+                <th>Empirical Improvement (&Delta;)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Passing Accuracy (&ge; 70%)</strong></td>
+                <td>0 / 50 (0.0%)</td>
+                <td><strong>6 / 50 (12.0%)</strong></td>
+                <td><span class="badge-success">+12.0% absolute gain</span></td>
+              </tr>
+              <tr>
+                <td><strong>Mean Correctness Score</strong></td>
+                <td>0.1113</td>
+                <td><strong>0.3423</strong></td>
+                <td><span class="badge-success">+0.2310 (+207% relative)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Mean Faithfulness Score</strong></td>
+                <td>0.7958</td>
+                <td><strong>0.8000</strong></td>
+                <td><span class="badge-success">+0.0042</span></td>
+              </tr>
+              <tr>
+                <td><strong>Citation Precision</strong></td>
+                <td>50.0%</td>
+                <td><strong>100.0%</strong></td>
+                <td><span class="badge-success">+50.0% (Zero Hallucinated IDs)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Expected Calib. Error (ECE)</strong></td>
+                <td>0.0037 (Raw Anomaly Score)</td>
+                <td><strong>0.0005 (Platt Scaled)</strong></td>
+                <td><span class="badge-success">-86.5% error reduction</span></td>
+              </tr>
+              <tr>
+                <td><strong>Average Response Latency</strong></td>
+                <td><strong>0.03 seconds</strong></td>
+                <td>3.56 seconds</td>
+                <td>+3.53s multi-agent deliberation</td>
+              </tr>
+              <tr>
+                <td><strong>Average Token Consumption</strong></td>
+                <td><strong>1,519 tokens</strong></td>
+                <td>2,255 tokens</td>
+                <td>~1.5&times; tokens due to state passing</td>
+              </tr>
+              <tr>
+                <td><strong>Average Cost per Query</strong></td>
+                <td><strong>$0.000340</strong></td>
+                <td>$0.000631</td>
+                <td>Extremely economical (&lt; $0.001)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">Qualitative Case Analysis, Failures &amp; Quality-Cost Trade-Offs</h2>
+          </div>
+          <table class="grid-table">
+            <tr>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Success Cases vs. Failure Case Analysis</h3>
+                  <ul>
+                    <li><strong>Success 1 (TID-001):</strong> Port 80 SYN flood (85k pkts/s). Baseline gave generic advice; ThreatRAG correctly flagged DDoS with 99.98% Platt confidence and mapped T1498.001.</li>
+                    <li><strong>Success 2 (HIS-004):</strong> Port 80 flood vs Dyn DNS. Baseline gave flat summary; ThreatRAG contrasted transport layer (TCP/80) vs application DNS (UDP/53).</li>
+                    <li><strong>Failure Case (TID-014):</strong> 'Quantum tachyon modulation'. Baseline hallucinated theoretical attacks; ThreatRAG caught low similarity (&lt; 0.15), triggered 1 feedback retry, and correctly abstained with an insufficient-evidence qualification.</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Quality-Cost Trade-Offs &amp; Honest Limitations</h3>
+                  <ul>
+                    <li><strong>Quality vs Latency:</strong> Multi-agent deliberation adds 3.53 seconds of latency, which is acceptable for SOC triage where wrong decisions cause massive downtime.</li>
+                    <li><strong>Quality vs Cost:</strong> Multi-agent uses 1.5x more tokens but costs only $0.00063 per query.</li>
+                    <li><strong>Current Limitations:</strong> Evaluated on Friday DDoS and benign flows from CIC-IDS2017; expanding to advanced persistent threat (APT) multi-day campaigns is ongoing work.</li>
+                    <li><strong>Dependency:</strong> Hybrid retrieval quality depends on initial BM25 tokenization preserving CVE punctuation.</li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">Live Demonstration Walkthrough (7–10 Minutes)</h2>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Demonstration Stages for the Instructor</h3>
+            <ol style="margin-left: 14pt; font-size: 8pt; line-height: 1.45;">
+              <li><strong>Stage 1 (System Overview):</strong> Inspect active knowledge base (1,074 chunks, 718 ATT&amp;CK techniques, 1,790 CVEs, 30k flows).</li>
+              <li><strong>Stage 2 (Representative Query Execution):</strong> Submit 'DDoS Flood Alert (Port 80)' preset on Threat Analysis page.</li>
+              <li><strong>Stage 3 (Observable Agent Trace):</strong> Open Agent Execution Trace Panel to show:
+                <ul>
+                  <li>Coordinator task formulation and specialist assignment.</li>
+                  <li>Retrieval Specialist hybrid candidate passages with similarity scores.</li>
+                  <li>Reasoning Specialist calibrated ML classification (99.98%) and salient feature attribution.</li>
+                  <li>Verification Specialist citation check and decision (APPROVED).</li>
+                </ul>
+              </li>
+              <li><strong>Stage 4 (Defensive Response &amp; Human Gate):</strong> Demonstrate CISA containment checklist and Human-in-the-Loop authorization checkbox.</li>
+              <li><strong>Stage 5 (Insufficient Evidence Demo):</strong> Submit fictional/ungrounded query; demonstrate Verification Agent detecting insufficient evidence and triggering abstention.</li>
+              <li><strong>Stage 6 (Side-by-Side Comparison):</strong> Open AI506 Baseline Comparison page to contrast Conventional RAG vs Multi-Agent ThreatRAG side by side.</li>
+            </ol>
+          </div>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">Conclusions, Contributions &amp; Verification</h2>
+          </div>
+          <table class="grid-table">
+            <tr>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Summary of Contributions</h3>
+                  <ul>
+                    <li><strong>Full AI506 Compliance:</strong> Implemented Coordinator, Retrieval, Reasoning, and Verification specialists with working feedback loops.</li>
+                    <li><strong>Adaptive Hybrid RAG:</strong> Fused dense semantic search, lexical BM25, and structured flow telemetry via RRF (<i>k</i>=60).</li>
+                    <li><strong>Confidence Calibration:</strong> Reduced ECE by 86.5% (0.0037 &rarr; 0.0005) via post-hoc Platt Scaling on 6,000 test flows.</li>
+                    <li><strong>Empirical Superiority:</strong> Achieved 100% citation precision and +207% correctness improvement over baseline.</li>
+                    <li><strong>Strictly Defensive Posture:</strong> Human-in-the-Loop authorization gate prevents automated disruptions.</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="card-td">
+                <div class="card">
+                  <h3 class="card-title">Project Deliverables &amp; Repository Access</h3>
+                  <ul>
+                    <li><strong>GitHub Repository:</strong> https://github.com/ahsitab/ThreatRAG</li>
+                    <li><strong>Complete Deliverables:</strong>
+                      <ul>
+                        <li>Full source code (<code>agents/</code>, <code>rag/</code>, <code>models/</code>, <code>app/</code>, <code>api/</code>)</li>
+                        <li>50-Question Benchmark Suite (<code>data/evaluation/</code>)</li>
+                        <li>AI506 Evaluation Comparison Report (<code>reports/</code>)</li>
+                        <li>IEEE 4–6 Page Conference Report (<code>reports/ThreatRAG_AI506_IEEE.pdf</code>)</li>
+                        <li>12-Slide Presentation (<code>presentation/ThreatRAG_AI506_Presentation.pptx</code>)</li>
+                        <li>Live Demonstration Script &amp; Viva Prep Guide (<code>presentation/</code>)</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="slide">
+          <div class="slide-header">
+            <div class="slide-cat">AI506 MSC MIDTERM PROJECT PRESENTATION</div>
+            <h2 class="slide-title">Key References &amp; Citations</h2>
+          </div>
+          <div class="card">
+            <div style="font-size: 7.5pt; line-height: 1.45;">
+              <p><strong>[1]</strong> C.-Y. Chang, C.-H. Lee, N.-H. Wang, and Y.-N. Chen, "MAIN-RAG: Multi-Agent Filtering Retrieval-Augmented Generation," in <i>Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (ACL)</i>, 2025, pp. 2607–2622. <strong>(Selected Base Paper)</strong></p>
+              <p><strong>[2]</strong> X. Xiao, H. Huang, R. Liu, and J. Xie, "MASS-RAG: Multi-Agent Synthesis Retrieval-Augmented Generation," in <i>Findings of ACL</i>, 2026, pp. 9865–9883.</p>
+              <p><strong>[3]</strong> S. Es, J. James, L. Espinosa Anke, and S. Schockaert, "RAGAs: Automated Evaluation of Retrieval Augmented Generation," in <i>EACL System Demonstrations</i>, 2024, pp. 150–158.</p>
+              <p><strong>[4]</strong> MITRE Corporation, "MITRE ATT&amp;CK Enterprise Matrix v14.1," 2024. [Online]. Available: https://attack.mitre.org</p>
+              <p><strong>[5]</strong> Cybersecurity and Infrastructure Security Agency (CISA), "Known Exploited Vulnerabilities Catalog," 2024. [Online]. Available: https://www.cisa.gov/known-exploited-vulnerabilities-catalog</p>
+              <p><strong>[6]</strong> I. Sharafaldin, A. H. Lashkari, and A. A. Ghorbani, "Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization (CIC-IDS2017)," in <i>Proc. ICISSP</i>, 2018.</p>
+              <p><strong>[7]</strong> Y. Gao et al., "Retrieval-Augmented Generation for Large Language Models: A Survey," <i>IEEE TKDE</i>, 2024.</p>
+            </div>
+          </div>
+        </div>
+        
+</body>
+</html>

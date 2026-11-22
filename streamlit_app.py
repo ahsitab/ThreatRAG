@@ -15,6 +15,7 @@ pages = [
     st.Page("app/pages/5_Defensive_Response.py", title="Defensive Response Plan", icon="🛡️"),
     st.Page("app/pages/6_Knowledge_Manager.py", title="Knowledge Base Manager", icon="🗄️"),
     st.Page("app/pages/7_Research_Evaluation.py", title="Research Evaluation", icon="📈"),
+    st.Page("app/pages/8_AI506_Baseline_Comparison.py", title="AI506 Baseline Comparison", icon="⚖️"),
 ]
 
 pg = st.navigation(pages)

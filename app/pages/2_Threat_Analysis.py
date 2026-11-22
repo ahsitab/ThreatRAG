@@ -139,6 +139,75 @@ if st.button("🚀 Run ThreatRAG Analysis Pipeline", type="primary", use_contain
     st.subheader("5. Analyst Summary")
     st.markdown(threat_info.get("analyst_summary", "No summary generated."))
 
+    # --- AI506 MANDATORY: AGENT EXECUTION TRACE PANEL ---
+    st.markdown("---")
+    st.subheader("🕵️‍♂️ Multi-Agent Execution Trace Panel (AI506 Live Trace)")
+    st.markdown(
+        "*Step-by-step observable agent handoffs, task planning, retrieval scores, verification decisions, and feedback loops.*"
+    )
+
+    trace = pipeline_result.get("execution_trace", [])
+    fb_count = pipeline_result.get("feedback_loops_count", 0)
+
+    # Workflow summary status bar
+    st.markdown(f"""
+    <div style="background-color: #F1F5F9; border-left: 5px solid #1E3A8A; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
+        <strong>Multi-Agent Status:</strong> Orchestration Complete &bull; 
+        <strong>Active Agents:</strong> 4 Logical Specialists &bull; 
+        <strong>Feedback Loops Triggered:</strong> {fb_count} &bull; 
+        <strong>Latency:</strong> {latency:.2f}s
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Visual Workflow Diagram
+    st.markdown("""
+    ```mermaid
+    graph LR
+        Q[User Query / Telemetry] --> C[Coordinator / Planner]
+        C -->|Assigns Hybrid Search| R[Retrieval Specialist]
+        R -->|Top-k Grounded Chunks| S[Reasoning Specialist]
+        S -->|Synthesized Claims| V[Verification Specialist]
+        V -->|Feedback Loop If Insufficient| R
+        V -->|Verified & Grounded| F[Final Answer + Citations]
+    ```
+    """)
+
+    if trace:
+        for idx, step in enumerate(trace, 1):
+            agent_name = step.get("agent", "Agent")
+            action = step.get("action", "Execution Step")
+            status = step.get("status", "Complete")
+            details = step.get("details", "")
+
+            # Badge styling based on agent
+            if "Coordinator" in agent_name:
+                badge_bg = "#EDE9FE"
+                badge_color = "#5B21B6"
+            elif "Retrieval" in agent_name:
+                badge_bg = "#E0F2FE"
+                badge_color = "#0369A1"
+            elif "Reasoning" in agent_name:
+                badge_bg = "#FEF3C7"
+                badge_color = "#92400E"
+            elif "Verification" in agent_name:
+                badge_bg = "#DCFCE7" if status == "APPROVED" else "#FEE2E2"
+                badge_color = "#166534" if status == "APPROVED" else "#991B1B"
+            else:
+                badge_bg = "#F3F4F6"
+                badge_color = "#374151"
+
+            with st.expander(f"Step {idx}: [{agent_name}] — {action} ({status})", expanded=(idx <= 2 or "Verification" in agent_name)):
+                st.markdown(
+                    f"<span style='background-color:{badge_bg}; color:{badge_color}; padding:4px 10px; border-radius:6px; font-weight:700;'>{status}</span>",
+                    unsafe_allow_html=True
+                )
+                if isinstance(details, dict):
+                    st.json(details)
+                else:
+                    st.write(details)
+    else:
+        st.info("Execution trace details captured in background pipeline.")
+
     with st.expander("Audit Trail & Token Consumption"):
         metrics = pipeline_result.get("execution_metrics", {})
         st.write(f"- **Total Tokens Consumed:** {metrics.get('total_tokens', 0)}")

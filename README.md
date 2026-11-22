@@ -85,17 +85,25 @@ ThreatRAG features a multi-page interactive dashboard for security analysts and 
 ```text
 ThreatRAG/
 ├── agents/                       # 4 Multi-agent implementations & orchestrator
-│   ├── threat_identifier.py      # Agent 1: Telemetry validation & calibrated ML inference
-│   ├── incident_search.py        # Agent 2: Historical incident similarity matching
-│   ├── evidence_explainer.py     # Agent 3: ATT&CK grounding & fact/hypothesis separation
-│   ├── response_advisor.py       # Agent 4: Prioritized playbooks & human approval gate
+│   ├── coordinator.py            # AI506 Agent 1: Coordinator / Planner & Feedback Loop Controller
+│   ├── retrieval_agent.py        # AI506 Agent 2: Cybersecurity Retrieval Specialist
+│   ├── reasoning_agent.py        # AI506 Agent 3: Security Reasoning & ATT&CK Mapping Specialist
+│   ├── verification_agent.py     # AI506 Agent 4: Evidence Verification Specialist & Citation Auditor
+│   ├── threat_identifier.py      # Telemetry validation & calibrated ML inference facade
+│   ├── incident_search.py        # Historical incident similarity matching facade
+│   ├── evidence_explainer.py     # ATT&CK grounding & fact/hypothesis separation facade
+│   ├── response_advisor.py       # Prioritized playbooks & human approval gate facade
 │   └── orchestrator.py           # Pipeline coordinator, token tracking, state machine
 ├── api/                          # FastAPI production REST backend
 │   ├── routes/                   # Route controllers (analysis, documents, evaluation)
 │   ├── schemas/                  # Pydantic v2 data transfer schemas
 │   └── main.py                   # App entrypoint, CORS, timing middleware, health checks
-├── app/                          # Streamlit 7-page interactive dashboard
-│   ├── pages/                    # Multi-page views (Overview, Threat Analysis, Evaluation, etc.)
+├── app/                          # Streamlit 8-page interactive dashboard
+│   ├── pages/                    # Multi-page views (Overview, Threat Analysis, AI506 Comparison, etc.)
+│   │   ├── 1_System_Overview.py
+│   │   ├── 2_Threat_Analysis.py  # Interactive UI + Live Observable Agent Trace Panel
+│   │   ├── ...
+│   │   └── 8_AI506_Baseline_Comparison.py # Head-to-head Single vs Multi-Agent interactive page
 │   └── dashboard.py              # Main navigation & landing interface
 ├── artifacts/                    # Serialized models, scalers, and vector indices
 │   ├── chroma_db/                # Persistent vector database (all-MiniLM-L6-v2)
@@ -104,6 +112,7 @@ ThreatRAG/
 │   └── flow_scaler.joblib        # Robust standard scaler
 ├── configs/                      # Configuration parameters & prompt templates
 ├── data/                         # Data storage hierarchy
+│   ├── evaluation/               # AI506 50-Question Benchmark Suite (.json and .csv)
 │   ├── manifests/                # Provenance manifests with SHA-256 checksums
 │   ├── processed/                # Normalized chunks (1,074) and cleaned flows
 │   ├── raw/                      # Public datasets (CIC-IDS2017, STIX 2.1, CISA KEV)
@@ -111,10 +120,14 @@ ThreatRAG/
 ├── docs/screenshots/             # Dashboard visual interface captures
 ├── evaluation/                   # Evaluation harnesses (retrieval, generation, agents, ablation)
 ├── models/                       # ML training, feature scaling, and calibration engines
-│   ├── calibration.py            # Platt scaling, Isotonic regression, ECE, Brier score
-│   ├── predict.py                # Calibrated inference engine with feature attribution
-│   └── train.py                  # Training pipeline across LR, RF, and LightGBM
+├── presentation/                 # AI506 Presentation & Demonstration Deliverables
+│   ├── ThreatRAG_AI506_Presentation.pptx # 12-slide Widescreen PowerPoint Presentation
+│   ├── ThreatRAG_AI506_Presentation.pdf  # 12-slide Landscape Printable Presentation
+│   ├── DEMO_SCRIPT.md            # 7-10 minute Live Demonstration Script
+│   ├── VIVA_PREPARATION.md       # Technical Viva Prep Guide (13 in-depth Q&A)
+│   └── DEMO_QUERIES.json         # Curated demonstration input profiles
 ├── rag/                          # Retrieval engine components
+│   ├── baseline_single_agent.py  # AI506 Conventional Single-Agent RAG Baseline
 │   ├── chunking.py               # Security entity tokenizer & metadata-aware chunker
 │   ├── embeddings.py             # SentenceTransformer wrapper (all-MiniLM-L6-v2)
 │   ├── vector_store.py           # Persistent ChromaDB client
@@ -125,31 +138,70 @@ ThreatRAG/
 │   ├── citation_validator.py     # Bracketed citation auditor & injection defense
 │   └── ingestion.py              # Incremental knowledge base manager
 ├── reports/                      # Academic figures, tables, and findings
-│   ├── figures/                  # Reliability diagram & confusion matrix
-│   ├── tables/                   # Benchmark CSVs (retrieval, ablation, calibration)
-│   ├── limitations.md            # Internal, external, and construct validity threats
-│   └── results.md                # Comprehensive experimental report
+│   ├── figures/                  # Reliability diagram, confusion matrix & AI506 metrics
+│   ├── ThreatRAG_AI506_IEEE.pdf  # IEEE 4-6 Page Conference Paper (PDF)
+│   ├── ThreatRAG_AI506_IEEE.tex  # IEEE LaTeX Source
+│   ├── AI506_COMPLIANCE_AUDIT.md # AI506 Compliance Audit
+│   ├── FINAL_AI506_COMPLIANCE_REPORT.md # 100% Pass Final Compliance Report
+│   ├── ai506_baseline_comparison.csv    # 50-question empirical comparison CSV
+│   └── ai506_evaluation_results.md      # Comprehensive benchmark report
 ├── research/                     # Literature review & methodology documentation
-│   ├── references.bib            # 22 verified academic references (DOIs/URLs)
-│   ├── literature_matrix.csv     # Comparative matrix across 10 dimensions
-│   ├── literature_review.md      # Structured academic literature review
-│   ├── research_gap.md           # Formal gap analysis, RQ1-RQ4, hypotheses H1-H4
-│   ├── methodology.md            # Mathematical specifications & architecture
-│   └── experimental_design.md    # Baselines E1-E6, protocols, and metrics
-├── scripts/                      # Automation & data download utilities
-│   ├── download_datasets.py      # Resumable downloader with SHA-256 validation
-│   ├── prepare_data.py           # Preprocessing & stratified splitting
-│   ├── build_index.py            # Vector and BM25 indexing pipeline
-│   └── run_experiments.py        # Master research experiment runner
+│   ├── selected_base_paper.md    # Base Paper Analysis: MAIN-RAG (ACL 2025)
+│   ├── paper_to_project_mapping.md # Adopted, adapted & extended concepts
+│   ├── references.bib            # BibTeX references (MAIN-RAG, MASS-RAG, RAGAs)
+│   └── evaluation_dataset_documentation.md # 50-question benchmark documentation
+├── scripts/                      # Automation & evaluation utilities
+│   ├── compile_ai506_deliverables.py # Deliverables compiler (PDFs & markdown)
+│   ├── create_ai506_questions.py # Benchmark generator script
+│   ├── generate_presentation.py  # 12-slide PowerPoint generator
+│   └── run_ai506_experiments.py  # 50-question Head-to-Head Benchmark Runner
 ├── tests/                        # Automated Pytest suite
 │   ├── test_rag.py               # Unit tests for chunking, BM25, vector, reranking
 │   ├── test_models.py            # Unit tests for inference, calibration, ECE
 │   ├── test_agents.py            # Integration tests for all 4 agents & orchestrator
 │   └── test_api.py               # FastAPI TestClient endpoint validation
-├── Dockerfile                    # Multi-stage production container build
-├── docker-compose.yml            # Dual-service deployment (API + UI)
 ├── requirements.txt              # Pinned Python package dependencies
 └── README.md                     # Research documentation and reproduction manual
+```
+
+---
+
+## 🏆 AI506 MSc Midterm Project Compliance & Deliverables (20 Marks)
+
+ThreatRAG is fully compliant with the **AI506 Multi-Agent Retrieval-Augmented Generation System Specification**:
+
+### 1. Selected Base Research Paper (ACL 2025)
+- **Base Paper:** *MAIN-RAG: Multi-Agent Filtering Retrieval-Augmented Generation* by Chang et al., **Proceedings of ACL 2025**, pp. 2607–2622.
+- **Why Chosen:** MAIN-RAG establishes that decoupling passage filtering and verification from answer generation eliminates context noise.
+- **ThreatRAG Extension:** We adopted the decoupled agent roles and iterative feedback loop, adapted them to the MITRE ATT&CK taxonomy and CISA KEV catalog, and extended them with **Tri-Modal Hybrid Retrieval** (text + NetFlow) and **Platt Confidence Calibration**.
+- **Documentation:** See [`research/selected_base_paper.md`](file:///e:/SITAB_MSc/AIML-507/Project-507/research/selected_base_paper.md) and [`research/paper_to_project_mapping.md`](file:///e:/SITAB_MSc/AIML-507/Project-507/research/paper_to_project_mapping.md).
+
+### 2. Multi-Agent Collaborative Architecture with Iterative Feedback Loop
+- **Agent 1 (Coordinator / Planner):** Interprets input, formulates structured workflow plans, schedules specialists, manages state, and caps feedback retries (`max_retries = 2`).
+- **Agent 2 (Cybersecurity Retrieval Specialist):** Executes dense semantic search + BM25Okapi + flow matching via Reciprocal Rank Fusion ($k=60$) across 1,074 chunks.
+- **Agent 3 (Security Reasoning Specialist):** Executes calibrated LightGBM anomaly inference, maps tactics to MITRE ATT&CK, separates empirical facts from hypotheses, and synthesizes containment playbooks.
+- **Agent 4 (Evidence Verification Specialist):** Audits bracketed citations against retrieved chunk IDs, computes faithfulness scores, detects insufficient evidence, and triggers re-retrieval when claims lack support.
+
+### 3. Observable Agent Trace & Side-by-Side Comparison UI
+- **Live Agent Execution Trace:** Page `2_Threat_Analysis.py` features an interactive panel displaying workflow diagrams (Mermaid), real-time timing, step-by-step specialist outputs, and feedback loop status.
+- **Baseline Comparison Page:** Page `8_AI506_Baseline_Comparison.py` provides interactive side-by-side evaluation of Conventional Single-Agent RAG vs. Multi-Agent ThreatRAG across the 50 benchmark questions.
+
+### 4. Curated 50-Question Benchmark Suite & Empirical Results
+- **Benchmark Suite:** 50 curated questions with ground truth rubrics, MITRE IDs, CVEs, difficulty levels, and 4 ungrounded edge cases in [`data/evaluation/ai506_test_questions.json`](file:///e:/SITAB_MSc/AIML-507/Project-507/data/evaluation/ai506_test_questions.json).
+- **Measured Results ($N=50$):**
+  - **Passing Accuracy ($\ge 70\%$):** Multi-Agent **12.0%** vs Single-Agent **0.0%** (+12.0% gain under strict exact-match criteria).
+  - **Mean Correctness Score:** Multi-Agent **0.3423** vs Single-Agent **0.1113** (**+207% relative increase**).
+  - **Citation Precision:** Multi-Agent **100.0%** vs Single-Agent **50.0%** (zero hallucinated chunk IDs).
+  - **Expected Calibration Error (ECE):** **0.0005** (Platt) vs **0.0037** (Raw) (**-86.5% error reduction**).
+  - **Deliberation Latency:** **3.56 s** (Multi-Agent) vs **0.03 s** (Single-Agent Baseline).
+  - **Token Usage / Cost:** **2,255 tokens ($0.000631/query)** vs **1,519 tokens ($0.000340/query)**.
+
+### 5. Official Deliverables Summary
+- **IEEE Conference Paper (4–6 pages):** [`reports/ThreatRAG_AI506_IEEE.pdf`](file:///e:/SITAB_MSc/AIML-507/Project-507/reports/ThreatRAG_AI506_IEEE.pdf) & [`reports/ThreatRAG_AI506_IEEE.tex`](file:///e:/SITAB_MSc/AIML-507/Project-507/reports/ThreatRAG_AI506_IEEE.tex)
+- **12-Slide Presentation:** [`presentation/ThreatRAG_AI506_Presentation.pptx`](file:///e:/SITAB_MSc/AIML-507/Project-507/presentation/ThreatRAG_AI506_Presentation.pptx) & [`presentation/ThreatRAG_AI506_Presentation.pdf`](file:///e:/SITAB_MSc/AIML-507/Project-507/presentation/ThreatRAG_AI506_Presentation.pdf)
+- **Live Demo Script (7–10 min):** [`presentation/DEMO_SCRIPT.md`](file:///e:/SITAB_MSc/AIML-507/Project-507/presentation/DEMO_SCRIPT.md)
+- **Technical Viva Preparation Guide:** [`presentation/VIVA_PREPARATION.md`](file:///e:/SITAB_MSc/AIML-507/Project-507/presentation/VIVA_PREPARATION.md)
+- **Final AI506 Compliance Audit:** [`reports/FINAL_AI506_COMPLIANCE_REPORT.md`](file:///e:/SITAB_MSc/AIML-507/Project-507/reports/FINAL_AI506_COMPLIANCE_REPORT.md) (100% Pass across all 20 criteria)
 ```
 
 ---

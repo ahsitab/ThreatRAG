@@ -1,0 +1,60 @@
+[
+  {
+    "scenario_id": "DEMO-01",
+    "name": "Live Attack Triage (DDoS Port 80 SYN Flood)",
+    "description": "Demonstrates full multi-agent triage: calibrated ML classification, ATT&CK T1498 mapping, and Human-in-the-Loop gate.",
+    "page": "Threat Analysis (Page 2)",
+    "preset_to_select": "DDoS Flood Alert (Port 80 HTTP Flood)",
+    "query": "High-volume ingress packet spike detected targeting web gateway on port 80. Excessive packet rates exceeding 100k packets/s observed.",
+    "telemetry": {
+      "Destination_Port": 80.0,
+      "Flow_Duration": 8500.0,
+      "Total_Fwd_Packets": 240.0,
+      "Total_Backward_Packets": 4.0,
+      "Flow_Bytes_s": 950000.0,
+      "Flow_Packets_s": 85000.0,
+      "Packet_Length_Mean": 18.5
+    },
+    "expected_verdict": "THREAT DETECTED (DDoS)",
+    "calibrated_confidence": "99.98%",
+    "key_talking_point": "Show that LightGBM with Platt Scaling reduces calibration error to 0.0005, giving accurate probability rather than overconfident guesswork."
+  },
+  {
+    "scenario_id": "DEMO-02",
+    "name": "Benign Validation (Zero False Positive Check)",
+    "description": "Demonstrates that the system does not raise false alarms on standard corporate traffic.",
+    "page": "Threat Analysis (Page 2)",
+    "preset_to_select": "Benign Web Browsing (HTTPS Session)",
+    "query": "Standard outbound user HTTPS session to cloud services. Normal symmetric packet flow and standard duration.",
+    "telemetry": {
+      "Destination_Port": 443.0,
+      "Flow_Duration": 1500000.0,
+      "Total_Fwd_Packets": 18.0,
+      "Total_Backward_Packets": 22.0,
+      "Flow_Bytes_s": 12500.0,
+      "Flow_Packets_s": 26.6,
+      "Packet_Length_Mean": 450.0
+    },
+    "expected_verdict": "BENIGN",
+    "calibrated_confidence": "99.98% Benign",
+    "key_talking_point": "Zero False Positive Rate (FPR = 0.0000) on 6,000 held-out evaluation flows."
+  },
+  {
+    "scenario_id": "DEMO-03",
+    "name": "Historical Precedent Search",
+    "description": "Demonstrates hybrid similarity search against historical incident repository.",
+    "page": "Similar Incidents (Page 3)",
+    "query": "Massive Mirai botnet volumetric DNS flood causing widespread DNS resolution disruption",
+    "expected_top_match": "Dyn DNS DDoS Attack (October 2016)",
+    "key_talking_point": "Highlight shared characteristics vs key operational differences extracted automatically."
+  },
+  {
+    "scenario_id": "DEMO-04",
+    "name": "Genuine Failure & Insufficient Evidence Handling",
+    "description": "Demonstrates proper abstention when query is out-of-domain or ungrounded in corpus.",
+    "page": "AI506 Baseline Comparison (Page 8) or Threat Analysis",
+    "query": "Anomalous quantum tachyon modulation detected across local Ethernet switch ports.",
+    "expected_behavior": "Verification Specialist flags INSUFFICIENT_EVIDENCE, triggers 1 feedback loop retry, and issues an explicit uncertainty qualification instead of hallucinating.",
+    "key_talking_point": "Contrasts with Single-Agent RAG which hallucinates a fake quantum security vulnerability."
+  }
+]

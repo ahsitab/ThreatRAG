@@ -11,6 +11,10 @@ import hashlib
 import numpy as np
 from typing import List, Union
 
+# Ensure offline cache mode to avoid connection retries
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+
 class EmbeddingManager:
     def __init__(self, model_name: str = "sentence-transformers/all-MiniLM-L6-v2", cache_dir: str = "artifacts/embeddings_cache"):
         self.model_name = model_name

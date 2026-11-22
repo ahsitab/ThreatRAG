@@ -6,7 +6,12 @@ Evaluates joint query-document cross-attention to rescore and refine candidate r
 Includes a fast fallback reranker for air-gapped environments.
 """
 
+import os
 from typing import List, Dict, Any, Optional
+
+# Ensure offline cache mode to avoid connection retries
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
 class CrossEncoderReranker:
     def __init__(self, model_name: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"):
