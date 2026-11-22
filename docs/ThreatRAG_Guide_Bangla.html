@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>ThreatRAG: সম্পূর্ণ ব্যবহারকারী ও গবেষণা নির্দেশিকা (Bangla User Guide)</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm 15mm 20mm 15mm;
+            @bottom-right {
+                content: counter(page);
+                font-family: 'Segoe UI', 'Nirmala UI', sans-serif;
+                font-size: 9pt;
+            }
+        }
+        body {
+            font-family: 'Segoe UI', 'Nirmala UI', 'Vrinda', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-size: 11pt;
+        }
+        .header-container {
+            border-bottom: 3px solid #1e3a8a;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        h1 {
+            color: #1e3a8a;
+            font-size: 22pt;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+        }
+        .subtitle {
+            color: #475569;
+            font-size: 12pt;
+            margin: 0 0 10px 0;
+            font-weight: 500;
+        }
+        .meta-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 10px 15px;
+            margin: 15px 0 25px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 9.5pt;
+        }
+        h2 {
+            color: #0f172a;
+            font-size: 14pt;
+            border-bottom: 1.5px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+        h3 {
+            color: #1e3a8a;
+            font-size: 12pt;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+        p {
+            margin: 0 0 10px 0;
+            text-align: justify;
+        }
+        ul, ol {
+            margin: 0 0 15px 20px;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 9.5pt;
+        }
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 8px 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 8.5pt;
+            font-weight: bold;
+        }
+        .badge-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        .badge-success {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        .badge-info {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+        .alert-box {
+            background-color: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 12px 15px;
+            border-radius: 0 6px 6px 0;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        .warning-box {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 12px 15px;
+            border-radius: 0 6px 6px 0;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        .code-block {
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 9pt;
+            margin: 10px 0;
+            white-space: pre-wrap;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>ThreatRAG: ব্যবহারকারী ও গবেষণা নির্দেশিকা</h1>
+        <div class="subtitle">সাইবার সিকিউরিটি থ্রেট ইন্টেলিজেন্স ও ইনসিডেন্ট রেসপন্সের জন্য অ্যাডাপটিভ হাইব্রিড আরএজি ফ্রেমওয়ার্ক</div>
+        <div><strong>প্রজেক্ট কোড:</strong> AIML-507 (MSc AI Research) | <strong>রিসার্চার:</strong> আহসান হাবিব সিতাব (Ahsan Habib Sitab)</div>
+    </div>
+
+    <div class="meta-box">
+        <div><strong>সিস্টেম স্ট্যাটাস:</strong> সক্রিয় ও যাচাইকৃত (Active)</div>
+        <div><strong>লাইভ ড্যাশবোর্ড:</strong> http://localhost:8501</div>
+        <div><strong>ব্যাকএন্ড এপিআই:</strong> http://127.0.0.1:8000</div>
+        <div><strong>গিটহাব রিপোজিটরি:</strong> github.com/ahsitab/ThreatRAG</div>
+    </div>
+
+    <h2>১. ThreatRAG প্রজেক্টটি আসলে কি এবং কেন এটি তৈরি করা হয়েছে?</h2>
+    <p>
+        বর্তমান আধুনিক <strong>Security Operations Center (SOC)</strong>-এ প্রতিদিন হাজার হাজার সিকিউরিটি অ্যালার্ট আসে। প্রচলিত এআই বা সাধারণ মেশিন লার্নিং সিস্টেমগুলোর প্রধান সমস্যা হলো:
+    </p>
+    <ul>
+        <li><strong>অস্বচ্ছ বা ব্ল্যাক-বক্স ডিটেকশন (Black-box Detection):</strong> সাধারণ মডেলগুলো কেবল বলে দেয় আক্রমণ হয়েছে কি না, কিন্তু <em>কেন আক্রমণ বলা হলো</em> বা এর পেছনের কারণ ব্যাখ্যা করতে পারে না।</li>
+        <li><strong>অতিরিক্ত আত্মবিশ্বাস ও ভুল প্রেডিকশন (Overconfidence):</strong> অনেক সময় মডেল আনকোরা বা নতুন ডেটা পেলে ৯৯% আত্মবিশ্বাস নিয়ে ভুল প্রেডিকশন দেয়, যা সাইবার ডিফেন্সের জন্য অত্যন্ত ঝুঁকিপূর্ণ।</li>
+        <li><strong>এলএলএম-এর কাল্পনিক তথ্য (Hallucination):</strong> সাধারণ চ্যাটজিপিটি বা জেনারেটিভ মডেলগুলো ভুয়া সিভিই (CVE) নম্বর বা কাল্পনিক সিকিউরিটি অ্যাডভাইজরি তৈরি করে ফেলে।</li>
+    </ul>
+    <p>
+        <strong>ThreatRAG</strong> এই সমস্যার সমাধান করে। এটি একটি <strong>Adaptive Hybrid Retrieval-Augmented Generation (RAG)</strong> ফ্রেমওয়ার্ক যা লাইভ নেটওয়ার্ক ট্রাফিক বিশ্লেষণ করে, ক্যালিব্রেটেড প্রবাবিলিটি দিয়ে ঝুঁকি নির্ণয় করে, অফিসিয়াল <strong>MITRE ATT&CK</strong> এবং <strong>CISA KEV</strong> ডেটাবেস থেকে তথ্য সংগ্রহ করে সম্পূর্ণ প্রমাণভিত্তিক (Evidence-grounded) ব্যাখ্যা ও প্রতিরোধমূলক ব্যবস্থা প্রদান করে।
+    </p>
+
+    <h2>২. ড্যাশবোর্ডে আপনি কি কি ইনপুট দিবেন? (Input Guide)</h2>
+    <p>
+        অনেকের মনে প্রশ্ন জাগে—<em>"আমি এই সিস্টেমে কি ইনপুট দিব?"</em><br>
+        ThreatRAG-এ ইনপুট দেওয়া অত্যন্ত সহজ। আপনি ৩টি উপায়ে ইনপুট দিতে পারেন:
+    </p>
+
+    <h3>উপায় ১: ১-ক্লিক প্রিসেট (সবচেয়ে সহজ — কোনো কিছু টাইপ করা লাগবে না)</h3>
+    <p>
+        ড্যাশবোর্ডের <strong>Threat Analysis</strong> পেজে ড্রপডাউন থেকে যেকোনো একটি প্রস্তুত সিনারিও বেছে নিন:
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>প্রিসেটের নাম</th>
+                <th>এটি কি নির্দেশ করে?</th>
+                <th>সিস্টেমের আউটপুট ও ফলাফল</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>DDoS Flood Alert (Port 80)</strong></td>
+                <td>ওয়েব সার্ভারে প্রতি সেকেন্ডে ৮৫,০০০ প্যাকেট আসার তীব্র অ্যাটাক সিনারিও।</td>
+                <td><span class="badge badge-danger">THREAT DETECTED</span> (৯৯.৯৮% নিশ্চিত, MITRE T1498 ম্যাপিং)।</td>
+            </tr>
+            <tr>
+                <td><strong>Benign Web Browsing (HTTPS)</strong></td>
+                <td>একটি সাধারণ ক্লাউড ব্রাউজিং সেশন (স্বাভাবিক ট্রাফিক)।</td>
+                <td><span class="badge badge-success">BENIGN (নিরাপদ)</span> (কোনো মিথ্যা অ্যালার্ট নেই)।</td>
+            </tr>
+            <tr>
+                <td><strong>Reconnaissance Port Scan</strong></td>
+                <td>পোর্ট স্ক্যানিং বা হ্যাকারদের সার্ভার অনুসন্ধান প্রচেষ্টা।</td>
+                <td><span class="badge badge-info">SUSPICIOUS RECON</span> (পোর্ট ২২ টার্গেটিং চিহ্নিত)।</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>উপায় ২: সাধারণ টেক্সট বা অ্যালার্টের বিবরণ (Analyst Description)</h3>
+    <p>
+        আপনার ফায়ারওয়াল বা এসআইইএম (SIEM) লগ থেকে পাওয়া যেকোনো ঘটনা ইংরেজিতে লিখে দিন। যেমন:
+    </p>
+    <div class="code-block">"High-volume ingress packet spike detected targeting web gateway on port 80. Excessive packet rates observed."</div>
+
+    <h3>উপায় ৩: নেটওয়ার্ক ট্রাফিকের সংখ্যাগত মান (Numerical Flow Metrics)</h3>
+    <p>যদি আপনার কাছে লাইভ নেটওয়ার্ক লগের সংখ্যা থাকে, তবে নিচের ফিল্ডগুলো ব্যবহার করতে পারেন:</p>
+    <ul>
+        <li><strong>Destination Port:</strong> সার্ভারের কোন পোর্টে রিকোয়েস্ট এসেছে? (যেমন: ৮০ = HTTP ওয়েব, ৪৪৩ = HTTPS, ২২ = SSH, ৫৩ = DNS)।</li>
+        <li><strong>Flow Packets / s (প্যাকেট রেট):</strong> প্রতি সেকেন্ডে কতগুলো প্যাকেট ঢুকছে? সাধারণ ইউজারদের ক্ষেত্রে ১০ থেকে ১০০ প্যাকেট/সেকেন্ড থাকে, কিন্তু DDoS আক্রমণে তা ৫০,০০০ থেকে ১,৫০,০০০+ পর্যন্ত হতে পারে।</li>
+        <li><strong>Flow Duration (µs):</strong> কানেকশনটি কত মাইক্রোসেকেন্ড স্থায়ী ছিল (১,০০০,০০০ মাইক্রোসেকেন্ড = ১ সেকেন্ড)।</li>
+        <li><strong>Packet Length Mean (গড় প্যাকেট সাইজ):</strong> প্যাকেটের গড় আকার। সাধারণত আক্রমণের প্যাকেটগুলো খালি বা ছোট (১৫-৪০ বাইট) হয়, আর বৈধ ওয়েব ডেটা বড় (৪০০-১,৪০০ বাইট) হয়।</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>৩. ড্যাশবোর্ড ব্যাকএন্ডে কি কি কাজ করছে? (How It Works)</h2>
+    <p>
+        আপনি যখন <strong>"Run ThreatRAG Analysis Pipeline"</strong> বাটনে ক্লিক করেন, তখন ব্যাকএন্ডে স্বয়ংক্রিয়ভাবে ৪টি প্রধান প্রযুক্তি ও ৪টি এআই এজেন্ট কাজ করে:
+    </p>
+
+    <div class="alert-box">
+        <strong>সিস্টেম ওয়ার্কফ্লো সংক্ষেপে:</strong><br>
+        নেটওয়ার্ক ইনপুট ➔ ক্যালিব্রেটেড মেশিন লার্নিং ➔ অ্যাডাপটিভ হাইব্রিড রিট্রিভাল ➔ ৪টি এআই এজেন্টের সমন্নয় ➔ সাইটেশন ও সেফটি অডিট ➔ চূড়ান্ত রেসপন্স রিপোর্ট।
+    </div>
+
+    <h3>ধাপ ১: ক্যালিব্রেটেড মেশিন লার্নিং (Confidence Calibration)</h3>
+    <p>
+        সাধারণ মডেলগুলো ভুল হলেও নিজেদের ১০০% সঠিক দাবি করে। ThreatRAG-এ <strong>LightGBM</strong> অ্যালগরিদমের সাথে <strong>Platt Scaling</strong> যুক্ত করা হয়েছে। এটি ১৮,০০০ ট্রাফিক ডেটায় প্রশিক্ষিত এবং ৬,০০০ ভ্যালিডেশন ডেটায় ক্যালিব্রেট করা। এর ফলে মডেলের <strong>Expected Calibration Error (ECE)</strong> ০.০০৩৭ থেকে কমে <strong>০.০০০৫</strong> এ নেমে এসেছে (৮৬.৫% নির্ভুলতা বৃদ্ধি)।
+    </p>
+
+    <h3>ধাপ ২: ট্রাই-মোডাল হাইব্রিড রিট্রিভাল (Adaptive Hybrid Retrieval)</h3>
+    <p>
+        শুধু ভেক্টর সার্চ করলে অনেক সময় স্পেসিফিক সিভিই বা মাইটার কোড খুঁজে পাওয়া যায় না। তাই ThreatRAG তিনটি পদ্ধতি একসাথে ফিউশন (Reciprocal Rank Fusion, k=60) করে:
+    </p>
+    <ol>
+        <li><strong>Dense Semantic Search (all-MiniLM-L6-v2):</strong> বাক্যের ভাবার্থ বা কনটেক্সট খোঁজে।</li>
+        <li><strong>Sparse BM25 Search:</strong> হুবহু কোড যেমন <code>CVE-2023-34362</code> বা <code>T1498.001</code> নিখুঁতভাবে খুঁজে আনে।</li>
+        <li><strong>Structured Event Matcher:</strong> পোর্ট ও প্যাকেট রেটের সাথে মিলে এমন প্রোফাইল ফিল্টার করে।</li>
+        <li><strong>Cross-Encoder Reranker (ms-marco-MiniLM-L-6-v2):</strong> সেরা তথ্যগুলোকে র‍্যাংক করে অপ্রাসঙ্গিক তথ্য বাদ দেয়।</li>
+    </ol>
+
+    <h3>ধাপ ৩: ৪টি বিশেষায়িত এআই এজেন্টের সমন্নয় (Autonomous Multi-Agent Team)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>এজেন্টের নাম</th>
+                <th>দায়িত্ব ও ভূমিকা</th>
+                <th>আউটপুট</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Agent 1: Threat Identifier</strong></td>
+                <td>ইনপুট যাচাই করে এবং ক্যালিব্রেটেড প্রোবাবিলিটি ও অনিশ্চয়তা (Uncertainty) হিসাব করে।</td>
+                <td>আক্রমণের ধরন ও কোন কোন ফিচার সবচেয়ে দায়ী তার z-score ইমপ্যাক্ট।</td>
+            </tr>
+            <tr>
+                <td><strong>Agent 2: Incident Searcher</strong></td>
+                <td>অতীতের ঐতিহাসিক বড় বড় সাইবার অ্যাটাকের (যেমন Mirai, MOVEit, SolarWinds) সাথে তুলনা করে।</td>
+                <td>সাদৃশ্য স্কোর, মিল থাকা বিষয় এবং মূল পার্থক্যসমূহ।</td>
+            </tr>
+            <tr>
+                <td><strong>Agent 3: Evidence Explainer</strong></td>
+                <td>MITRE ATT&CK টেকনিকের সাথে প্রমাণ যুক্ত করে।</td>
+                <td>বাস্তব পর্যবেক্ষণ (Facts) এবং অনুমান (Hypotheses)-কে কঠোরভাবে আলাদা করে।</td>
+            </tr>
+            <tr>
+                <td><strong>Agent 4: Defensive Response Advisor</strong></td>
+                <td>CISA KEV গাইডলাইন অনুযায়ী ধাপে ধাপে ডিফেন্স চেকলিস্ট তৈরি করে।</td>
+                <td>কনটেইনমেন্ট, মিটিগেশন ও রিকভারি অ্যাকশন প্ল্যান।</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="warning-box">
+        <strong>⚠️ হিউম্যান-ইন-দ্য-লুপ সেফটি গেট (Human-in-the-Loop Safeguard):</strong><br>
+        ThreatRAG কোনো ঝুঁকিপূর্ণ নেটওয়ার্ক কনফিগারেশন স্বয়ংক্রিয়ভাবে বদলায় না। সার্ভার বন্ধ করা বা আইপি ব্লক করার মতো পদক্ষেপের জন্য অনুমোদিত হিউম্যান অ্যানালিস্টের ডিজিটাল সাইন-অফ বাধ্যতামূলক।
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2>৪. ড্যাশবোর্ডের প্রতিটি পেজ কিভাবে ব্যবহার করবেন? (Page Guide)</h2>
+
+    <h3>১. Overview (পেজ ১): নলেজ বেস পরিসংখ্যান</h3>
+    <p>
+        এখানে সিস্টেমের সম্পূর্ণ ডেটা ভাণ্ডার দেখা যায়: <strong>১,০৭৪টি নলেজ চাংক</strong>, <strong>৭১৮টি MITRE ATT&CK টেকনিক</strong>, এবং <strong>১,৭৯০টি CISA KEV ভালনারেবিলিটি</strong>।
+    </p>
+
+    <h3>২. Threat Analysis (পেজ ২): লাইভ থ্রেট ডিটেকশন</h3>
+    <p>
+        এখানে আপনি ফ্লো ডেটা বা প্রিসেট ইনপুট দিয়ে <strong>"Run Analysis"</strong> চাপবেন। সিস্টেম আপনাকে প্রোবাবিলিটি বার, কনফিডেন্স টিয়ার (High/Medium/Low) এবং কোন কোন ফিচারের কারণে এলার্ট হয়েছে তা গ্রাফ আকারে দেখাবে।
+    </p>
+
+    <h3>৩. Similar Incidents (পেজ ৩): ঐতিহাসিক ঘটনার অনুসন্ধান</h3>
+    <p>
+        যেকোনো আক্রমণ সম্পর্কে জানতে অনুসন্ধান করুন (যেমন: <em>"Mirai DNS flood"</em> বা <em>"SQL injection data breach"</em>)। সিস্টেম ঐতিহাসিক ডেটাবেস থেকে পূর্ববর্তী ঘটনার মিল ও অমিল খুঁজে বের করবে।
+    </p>
+
+    <h3>৪. Evidence Explanation (পেজ ৪): ফ্যাক্ট বনাম হাইপোথিসিস</h3>
+    <p>
+        এখানে বাস্তব ডেটা (যা নেটওয়ার্কে সরাসরি দেখা গেছে) এবং মডেলের অনুমান (যা হতে পারে) আলাদা করে দেখানো হয়। সাথে থাকে সাইটেশন অডিট রিপোর্ট যাতে মডেল কোনো মিথ্যা তথ্য দিতে না পারে।
+    </p>
+
+    <h3>৫. Defensive Response (পেজ ৫): প্রতিরোধ চেকলিস্ট ও অনুমোদন</h3>
+    <p>
+        ঝুঁকির মাত্রা (Critical, High, Medium) নির্বাচন করুন। সিস্টেম তাত্ক্ষণিক কনটেইনমেন্ট চেকলিস্ট দেবে। নিচে থাকা চেকবক্সে টিক দিয়ে আপনি ডিফেন্স পলিসি পাস করতে পারবেন।
+    </p>
+
+    <h3>৬. Knowledge Manager (পেজ ৬): নতুন ডকুমেন্ট যুক্ত করা</h3>
+    <p>
+        কোনো নতুন সিকিউরিটি রিপোর্ট বা টেক্সট আপলোড করতে চান? এখানে টেক্সট পেস্ট করে এক ক্লিকে ভেক্টর স্টোর ও বিএম২৫ ইনডেক্স রিফ্রেশ করতে পারবেন।
+    </p>
+
+    <h3>৭. Research Evaluation (পেজ ৭): গবেষণার ফলাফল ও গ্রাফ</h3>
+    <p>
+        এখানে গবেষণার সমস্ত মেট্রিক্স চার্ট সহ রয়েছে: রিট্রিভাল স্কোর (nDCG@5), মডেল ক্যালিব্রেশন কার্ভ এবং কনফিউশন ম্যাট্রিক্স।
+    </p>
+
+    <h2>৫. কিভাবে সিস্টেমটি লোকাল ও ক্লাউডে চালাবেন? (Deployment)</h2>
+
+    <h3>লোকাল মেশিনে রান করা:</h3>
+    <div class="code-block"># ১. ভার্চুয়াল এনভায়রনমেন্ট সক্রিয় করুন
+venv\Scripts\activate
+
+# ২. স্ট্রিমলিট ড্যাশবোর্ড চালু করুন
+streamlit run streamlit_app.py
+
+# ৩. ফাস্ট-এপিআই ব্যাকএন্ড চালু করুন (আলাদা টার্মিনালে)
+uvicorn api.main:app --host 127.0.0.1 --port 8000</div>
+
+    <h3>Streamlit Community Cloud-এ সম্পূর্ণ ফ্রি ডেপ্লয় করা:</h3>
+    <ol>
+        <li><strong>share.streamlit.io</strong> এ যান এবং আপনার GitHub (<code>ahsitab</code>) দিয়ে লগইন করুন।</li>
+        <li><strong>"New app"</strong> বাটনে ক্লিক করুন।</li>
+        <li>রিপোজিটরি নির্বাচন করুন: <code>ahsitab/ThreatRAG</code>, ব্রাঞ্চ: <code>main</code>, এবং ফাইল পাথ: <code>streamlit_app.py</code>।</li>
+        <li><strong>"Deploy!"</strong> বাটনে চাপ দিন। ২ মিনিটের মধ্যে আপনার লাইভ পাবলিক ড্যাশবোর্ড রেডি হয়ে যাবে!</li>
+    </ol>
+
+    <h2>৬. সংক্ষেপে সার্বিক পর্যালোচনা (Executive Summary)</h2>
+    <p>
+        ThreatRAG হলো একটি পূর্ণাঙ্গ, ডিফেন্সিভ, এবং গবেষণাভিত্তিক সাইবার সিকিউরিটি এআই সিস্টেম। এটি শুধুমাত্র একটি ডেমো চ্যাটবট নয়, বরং আসল নেটওয়ার্ক ফ্লো বিশ্লেষণ করতে সক্ষম একটি নির্ভরযোগ্য সিকিউরিটি কো-পাইলট যা গবেষক ও এসওসি অ্যানালিস্টদের সিদ্ধান্ত গ্রহণে সহায়তা করে।
+    </p>
+
+    <div style="text-align: center; margin-top: 35px; border-top: 1px solid #cbd5e1; padding-top: 15px; font-size: 9pt; color: #64748b;">
+        ThreatRAG Framework • Master's Research Project (AIML-507) • Strictly Defensive Posture • Zero Fabricated Metrics
+    </div>
+
+</body>
+</html>
