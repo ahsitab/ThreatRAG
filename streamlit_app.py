@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # Define modern multi-page navigation for Streamlit Cloud & local execution
 pages = [
     st.Page("app/dashboard.py", title="System Home", icon="🛡️", default=True),
+    st.Page("app/pages/0_Quickstart_Tutorial.py", title="Quickstart Tutorial", icon="📖"),
     st.Page("app/pages/1_Overview.py", title="Knowledge Base Overview", icon="📊"),
     st.Page("app/pages/2_Threat_Analysis.py", title="Calibrated Threat Analysis", icon="🚨"),
     st.Page("app/pages/3_Similar_Incidents.py", title="Similar Incident Search", icon="🔍"),

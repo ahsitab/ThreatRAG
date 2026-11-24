@@ -78,6 +78,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Welcome & Quick Tutorial Banner
+st.info("""
+👋 **New to ThreatRAG? Welcome!** ThreatRAG is an AI cybersecurity assistant powered by **4 specialist agents** that analyze security incidents without making up false facts.
+- **Want a simple step-by-step tutorial?** Visit the new [📖 Quickstart Tutorial](Quickstart_Tutorial) to learn how inputs, outputs, and the 4 agents work in plain English.
+- **Want to test right now?** Go to [🚨 Calibrated Threat Analysis](Threat_Analysis) and click any of our **6 ready-to-use 1-click example presets**!
+""")
+
 # Key metric summary tiles
 col1, col2, col3, col4 = st.columns(4)
 with col1:
@@ -124,10 +131,10 @@ st.subheader("Explore the Platform")
 nav_col1, nav_col2, nav_col3 = st.columns(3)
 
 with nav_col1:
-    st.markdown("#### 📊 [System Overview](Overview)")
-    st.write("Inspect knowledge base distributions, STIX 2.1 entities, and indexing topology.")
+    st.markdown("#### 📖 [Quickstart Tutorial](Quickstart_Tutorial)")
+    st.write("Beginner guide explaining what inputs to give, what outputs to expect, and the 4 AI agents.")
     st.markdown("#### 🚨 [Threat Analysis](Threat_Analysis)")
-    st.write("Submit live network flows or telemetry alerts for end-to-end multi-agent triage.")
+    st.write("Submit live network flows or pick from 6 ready-made 1-click example scenarios.")
 
 with nav_col2:
     st.markdown("#### 🔍 [Similar Incidents](Similar_Incidents)")
